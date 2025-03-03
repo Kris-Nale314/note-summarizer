@@ -1,0 +1,15 @@
+# Core dependencies
+streamlit
+crewai
+langchain=
+langchain-openai
+python-dotenv
+nltk
+pyperclip
+wordcloud
+matplotlib
+pandas
+
+# OpenAI client
+openai
+
