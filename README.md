@@ -2,8 +2,6 @@
 
 > **Where messy meeting transcripts go to become brilliant, actionable notes! ✨**
 
-![Super Script Banner](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXZ1eXNiZDZpZzBleXFjbGw3cHpvbDJlZmRqYjFvMXF5czh1cGVpYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0BKiK5sOCDdBlIic/giphy.gif)
-
 ## 🌟 Why This Exists
 
 Ever sat through a Teams meeting, received a lengthy transcript, and thought: "Great, now I have to read *all* of this?" Yeah, us too.
