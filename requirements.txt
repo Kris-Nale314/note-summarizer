@@ -1,7 +1,7 @@
 # Core dependencies
 streamlit
 crewai
-langchain=
+langchain
 langchain-openai
 python-dotenv
 nltk

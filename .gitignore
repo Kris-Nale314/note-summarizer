@@ -1,7 +1,15 @@
 venv/
-__pycache__/
+__pycache__/*
 *.pyc
 .env
 *.log
 .DS_Store
 *.sqlite3
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+*.pyc
+__pycache__/
+*.py[cod]
+crew.cp*

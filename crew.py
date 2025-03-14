@@ -1,23 +1,85 @@
-# crew.py (Complete and Clean Version)
+# crew.py (Enhanced Version with Advanced Chunking)
 from crewai import Agent, Task, Crew, Process
 from langchain.tools import tool
 from langchain_openai import ChatOpenAI
 import os
 import concurrent.futures
 from dotenv import load_dotenv
-from utils import chunk_transcript_by_character
+from utils import chunk_transcript_advanced, extract_speakers
+from utils.chunking import ChunkingProcessor
 
 load_dotenv()
 
 # --- Tools ---
 @tool
-def read_and_chunk_transcript(transcript_content: str, num_chunks: int, overlap: int) -> list[str]:
+def read_and_chunk_transcript(transcript_content: str, num_chunks: int = None, overlap: int = 200, strategy: str = "speaker_aware") -> list[str]:
     """
-    Reads a transcript, divides it into chunks, and returns the chunks.
+    Reads a transcript, divides it into chunks using the specified strategy, and returns the chunks.
+    
+    Args:
+        transcript_content: The transcript text
+        num_chunks: Target number of chunks (used for fixed-size strategy)
+        overlap: Overlap between chunks in characters
+        strategy: Chunking strategy ('fixed_size', 'speaker_aware', 'boundary_aware', 'semantic')
+        
+    Returns:
+        List of text chunks
     """
-    chunk_size = len(transcript_content) // num_chunks
-    chunks = chunk_transcript_by_character(transcript_content, chunk_size, overlap)
-    return chunks
+    try:
+        # Use the advanced chunking processor
+        processor = ChunkingProcessor(
+            default_chunk_size=len(transcript_content) // (num_chunks or 5),
+            default_chunk_overlap=overlap
+        )
+        
+        # Apply the selected chunking strategy
+        if strategy == "fixed_size":
+            chunk_size = len(transcript_content) // (num_chunks or 5)
+            chunk_objects = processor.chunk_text_fixed_size(
+                text=transcript_content,
+                chunk_size=chunk_size,
+                chunk_overlap=overlap
+            )
+        elif strategy == "speaker_aware":
+            chunk_objects = processor.chunk_text_speaker_aware(
+                text=transcript_content,
+                max_chunk_size=2000,
+                min_chunk_size=500
+            )
+        elif strategy == "boundary_aware":
+            chunk_objects = processor.chunk_text_boundary_aware(
+                text=transcript_content,
+                min_chunk_size=500,
+                max_chunk_size=2000
+            )
+        elif strategy == "semantic":
+            chunk_objects = processor.chunk_text_semantic(
+                text=transcript_content
+            )
+        else:
+            # Default to speaker_aware if invalid strategy
+            chunk_objects = processor.chunk_text_speaker_aware(transcript_content)
+        
+        # Convert chunk objects to text for compatibility with existing code
+        chunks = [chunk.text for chunk in chunk_objects]
+        
+        # If we didn't get enough chunks with the advanced methods, fall back to fixed-size
+        if len(chunks) < 2:
+            print(f"Warning: Only got {len(chunks)} chunks with {strategy} strategy, falling back to fixed-size")
+            chunk_size = len(transcript_content) // (num_chunks or 5)
+            chunks = chunk_transcript_advanced(
+                transcript=transcript_content,
+                num_chunks=num_chunks or 5,
+                overlap=overlap,
+                strategy="fixed_size"
+            )
+            
+        return chunks
+    except Exception as e:
+        print(f"Error in chunking: {e}")
+        # Fall back to basic character-based chunking in case of error
+        chunk_size = len(transcript_content) // (num_chunks or 5)
+        return chunk_transcript_advanced(transcript_content, num_chunks, overlap, "fixed_size")
 
 # --- Agents ---
 class TranscriptAgents:
@@ -127,6 +189,26 @@ class TranscriptAgents:
             connections in complex discussions and identifying the contextual elements 
             that tie different parts together. Your insights help transform fragmented 
             information into coherent, meaningful narratives.""",
+            verbose=self.verbose,
+            llm=self.synthesis_llm
+        )
+
+    def create_speaker_analyzer(self):
+        """Agent to analyze speaker patterns and dynamics"""
+        return Agent(
+            role='Conversation and Speaker Dynamics Specialist',
+            goal="""Analyze speaker patterns and conversational dynamics in the transcript:
+            1. Identify each speaker and their apparent role in the discussion
+            2. Analyze communication styles and patterns for each speaker
+            3. Map the flow of conversation and turn-taking patterns
+            4. Identify power dynamics and influence patterns
+            5. Note alignment and disagreement between participants
+            6. Track how ideas evolve through speaker contributions""",
+            backstory="""You are an expert in discourse analysis and communication 
+            patterns with a background in sociolinguistics and conversation analysis. 
+            You can identify subtle patterns in how people interact, who leads discussions, 
+            and how ideas are built collaboratively. Your insights help teams understand 
+            their communication dynamics and improve collaboration.""",
             verbose=self.verbose,
             llm=self.synthesis_llm
         )
@@ -247,15 +329,62 @@ class ContextCrew:
         result = crew.kickoff()
         return result
 
-class SynthesisCrew:
-    def __init__(self, summaries, action_items, context_analysis, agent):
-        self.summaries = summaries
-        self.action_items = action_items
-        self.context_analysis = context_analysis
+class SpeakerCrew:
+    """Crew to analyze speaker dynamics and patterns"""
+    def __init__(self, all_chunks, agent):
+        self.all_chunks = all_chunks
         self.agent = agent
         self.task = self.create_task()
 
     def create_task(self):
+        combined_chunks = "\n\n--- CHUNK SEPARATOR ---\n\n".join(self.all_chunks)
+        return Task(
+            description="""Analyze the speaker patterns and conversation dynamics in this transcript:
+            1. Identify each speaker and their apparent role or position
+            2. Analyze each speaker's communication style and patterns
+            3. Map who speaks to whom and how ideas flow between participants
+            4. Identify the dominant voices and how they influence the discussion
+            5. Note how alignment and disagreement manifest between speakers
+            6. Analyze how decisions are reached through speaker interactions
+            
+            IMPORTANT: Focus on the social and communication dynamics, not just the content.
+            Look for patterns in how people talk, interact, and influence each other.""",
+            agent=self.agent,
+            expected_output="""A comprehensive analysis of speaker dynamics, including 
+            roles, styles, interaction patterns, and influence structures within the conversation.""",
+            input=combined_chunks
+        )
+
+    def run(self):
+        crew = Crew(
+            agents=[self.agent],
+            tasks=[self.task],
+            verbose=True
+        )
+        result = crew.kickoff()
+        return result
+
+class SynthesisCrew:
+    def __init__(self, summaries, action_items, context_analysis, speaker_analysis=None, agent=None):
+        self.summaries = summaries
+        self.action_items = action_items
+        self.context_analysis = context_analysis
+        self.speaker_analysis = speaker_analysis  # Optional
+        self.agent = agent
+        self.task = self.create_task()
+
+    def create_task(self):
+        # Prepare input with all available analyses
+        task_input = {
+            "summaries": self.summaries, 
+            "action_items": self.action_items,
+            "context_analysis": self.context_analysis
+        }
+        
+        # Add speaker analysis if available
+        if self.speaker_analysis:
+            task_input["speaker_analysis"] = self.speaker_analysis
+        
         task = Task(
             description="""Create a comprehensive, highly organized synthesis that preserves ALL details:
             1. Begin with a concise Executive Summary of key points (2-3 paragraphs)
@@ -268,6 +397,7 @@ class SynthesisCrew:
             8. Create a consolidated, prioritized "Action Items" section
             9. Add an "Unresolved Questions" section for open issues
             10. If applicable, include a "Next Steps" section
+            11. If speaker analysis is provided, incorporate insights about communication dynamics
             
             IMPORTANT: The synthesis should be MORE detailed than any individual summary, 
             not less. Your goal is to create a comprehensive record that encompasses all 
@@ -275,11 +405,7 @@ class SynthesisCrew:
             agent=self.agent,
             expected_output="""A comprehensive, logically structured synthesis that preserves all 
             important details while organizing information for maximum clarity and usability.""",
-            input={
-                "summaries": self.summaries, 
-                "action_items": self.action_items,
-                "context_analysis": self.context_analysis
-            }
+            input=task_input
         )
         return task
 
@@ -294,22 +420,32 @@ class SynthesisCrew:
 
 # --- Main Execution Class ---
 class TranscriptAnalysisCrew:
-    def __init__(self, transcript_content, num_chunks, overlap, verbose=True, model_name="gpt-3.5-turbo"):
+    def __init__(self, transcript_content, num_chunks, overlap, verbose=True, model_name="gpt-3.5-turbo", chunking_strategy="speaker_aware"):
         self.transcript_content = transcript_content
         self.num_chunks = num_chunks
         self.overlap = overlap
         self.verbose = verbose
         self.model_name = model_name
+        self.chunking_strategy = chunking_strategy
         self.agents = TranscriptAgents(verbose=self.verbose, model_name=self.model_name)
 
     def run(self):
-        # Parse transcript and create chunks
+        # Parse transcript and create chunks using the specified strategy
         chunks_input = {
             "transcript_content": self.transcript_content,
             "num_chunks": self.num_chunks,
-            "overlap": self.overlap
+            "overlap": self.overlap,
+            "strategy": self.chunking_strategy
         }
         chunks = read_and_chunk_transcript.invoke(chunks_input)
+        
+        # Print chunking info if verbose
+        if self.verbose:
+            print(f"Created {len(chunks)} chunks using {self.chunking_strategy} strategy")
+            for i, chunk in enumerate(chunks):
+                print(f"Chunk {i+1}: {len(chunk)} characters")
+                print(f"Preview: {chunk[:100]}...")
+                print("-" * 50)
 
         # Create right number of summarizer agents based on chunk count
         num_summarizers = min(len(chunks), 5)  # Limit number of summarizers
@@ -332,8 +468,26 @@ class TranscriptAnalysisCrew:
         context_crew = ContextCrew(chunks, self.agents.create_detailed_context_finder())
         context_analysis = context_crew.run()
         
+        # Optionally analyze speaker dynamics
+        include_speaker_analysis = len(extract_speakers(self.transcript_content)) > 1
+        speaker_analysis = None
+        
+        if include_speaker_analysis:
+            try:
+                speaker_crew = SpeakerCrew(chunks, self.agents.create_speaker_analyzer())
+                speaker_analysis = speaker_crew.run()
+            except Exception as e:
+                print(f"Error in speaker analysis: {e}")
+                speaker_analysis = None
+        
         # Synthesize everything
-        synthesis_crew = SynthesisCrew(summaries, action_items, context_analysis, self.agents.create_synthesizer())
-        final_notes = synthesis_crew.run()  # Variable name is final_notes (with 's')
+        synthesis_crew = SynthesisCrew(
+            summaries, 
+            action_items, 
+            context_analysis, 
+            speaker_analysis, 
+            self.agents.create_synthesizer()
+        )
+        final_notes = synthesis_crew.run()
 
-        return final_notes  # Make sure to return final_notes, not final_note
+        return final_notes
