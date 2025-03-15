@@ -1,43 +1,47 @@
-# 🎙️ Note-Summarizer: The Advanced Transcript Analyzer
+# 🎙️ Note-Summarizer: Transform Messy Transcripts into Useful Notes
 
-> **Where messy meeting transcripts go to become brilliant, actionable notes! ✨**
+> **Your meeting transcripts deserve better than a quick skim!** ✨
 
-## 🌟 Why This Exists
+## 📝 What Is This?
 
-Ever sat through a Teams meeting, received a lengthy transcript, and thought: "Great, now I have to read *all* of this?" Yeah, us too.
+`Note-Summarizer` is a practical tool that turns long meeting transcripts, earnings calls, and other text-heavy content into organized, actionable summaries. It's designed to solve a real problem: helping busy professionals extract meaningful insights from the mountains of text generated in today's workplace.
 
-While tools like Microsoft Copilot have made strides in summarizing content, they still struggle with lengthy, complex meeting transcripts. The longer the transcript, the more the summaries become vague, miss key details, or lose the conversational nuance that makes meetings valuable.
+Whether you're drowning in `Microsoft Teams` meeting transcripts, trying to parse earnings calls for key insights, or making sense of lengthy interviews, Note-Summarizer has you covered!
 
-**SuperScript** was born as a personal project to tackle this problem. It's an exploration into how multi-agent AI approaches could potentially create more comprehensive, accurate, and useful meeting summaries.
+## 🌟 Why I Built This
 
-## ✨ Features That Make It Special
+If you've ever received a 30-page meeting transcript and thought "I don't have time to read all this..." - you're not alone! 
 
-- **Context-Aware Chunking** - Unlike one-size-fits-all approaches, SuperScript uses sophisticated chunking strategies that understand the natural flow of conversations
-  
-- **Speaker-Aware Processing** - Recognizes who said what and preserves the conversational dynamics
+While tools like `Microsoft Copilot` are making strides in summarization, they often miss critical details, speaker dynamics, and nuances that make the difference between a useful summary and a vague overview.
 
-- **Multi-Agent System** - Employs specialized AI agents working in coordination, each focused on different aspects of analysis:
-  - 📝 **Summarization Agents** carefully extract key points and preserve nuance
-  - 🎯 **Action Item Specialists** identify tasks and commitments
-  - 🔎 **Context Analysts** track themes and connections across the entire transcript
-  - 🧩 **Synthesis Experts** combine everything into a coherent whole
+I built `Note-Summarizer` to apply advanced AI techniques to this everyday problem, creating a practical tool that helps me (and hopefully you!) work more efficiently and effectively.
 
-- **Visual Speaker Analysis** - See who dominated the conversation (we all know that one person...)
+## 💎 What Makes This Special
 
-- **Word Cloud Visualizations** - Quickly grasp the most discussed topics
+- **Intelligent Division Strategies** - Four different approaches to break down documents:
+  - ✂️ **Basic**: Smart simple division for any document type
+  - 🗣️ **Speaker**: Preserves conversation flow and speaker attribution
+  - 📑 **Boundary**: Respects document structure like headings and paragraphs
+  - 🧠 **Context-Aware**: Maintains semantic coherence and topical relationships
+
+- **Side-by-Side Comparison** - See which strategy works best for your specific content
+
+- **Actionable Results** - Automatically extract tasks, commitments, and follow-up items
+
+- **Interactive Visualizations** - Word clouds and metrics to quickly grasp key themes
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Python 3.7+
-- OpenAI API key (required for AI processing)
+- OpenAI API key
 
-### Installation
+### Quick Start
 
 ```bash
 # Clone this repository
-git clone https://github.com/yourusername/superscript.git
-cd superscript
+git clone https://github.com/Kris-Nale314/note-summarizer.git
+cd note-summarizer
 
 # Set up virtual environment
 python -m venv venv
@@ -53,65 +57,51 @@ echo "OPENAI_API_KEY=your-api-key-here" > .env
 streamlit run app.py
 ```
 
-## 🧠 The Science Behind It
+### Using Docker
 
-SuperScript's power comes from its innovative chunking strategies and multi-agent approach:
+```bash
+# Build and run with Docker
+docker-compose up -d
+```
 
-### Advanced Chunking Strategies
+## 🛠️ The Tech Behind It
 
-- **Speaker-Aware**: Optimized for meetings, preserves who-said-what
-- **Boundary-Aware**: Identifies natural topic transitions and paragraph breaks
-- **Semantic**: Uses AI to detect conceptual boundaries between different discussion topics
-- **Fixed-Size**: A reliable fallback that creates equal-sized chunks
+Note-Summarizer uses a modular, extensible architecture:
 
-### Collaborative AI Workflow
+1. **Smart Document Division** - Rather than arbitrary chunks, the app uses intelligent strategies to divide documents in ways that preserve meaning
 
-1. **Initial Analysis**: The transcript is intelligently divided using one of the chunking strategies
-2. **Parallel Processing**: Multiple specialized agents analyze different aspects simultaneously
-3. **Context Preservation**: Cross-chunk analysis ensures no connections are lost
-4. **Synthesis**: All insights are combined into a cohesive, organized summary with action items
+2. **LLM-Powered Summarization** - Leverages OpenAI's models with carefully crafted prompts specific to each document type
 
-### Benefits Over Single-Agent Approaches
+3. **Adaptable Processing Pipeline** - Customized approaches for different content types (transcripts, articles, technical documents)
 
-Most summarization tools use a single LLM with limited context windows, leading to:
-- Lost details in long transcripts
-- Missed connections between early and late discussion points
-- Vague, overgeneralized summaries
+4. **Flexible LLM Integration** - Support for OpenAI models with the ability to extend to other providers via LiteLLM
 
-SuperScript's multi-agent approach helps overcome these limitations through specialization and collaboration.
+## 💼 Real-World Applications
 
-## 📊 Use Cases
+- **Meeting Follow-ups**: Transform hour-long team meetings into concise action plans
+- **Earnings Call Analysis**: Extract key financial insights and executive commentary
+- **Research Synthesis**: Condense interviews and discussions into structured findings
+- **News Monitoring**: Stay on top of industry news without reading every article
+- **Document Review**: Quickly grasp the essence of long reports and documentation
 
-- **Meeting Follow-ups**: Transform hour-long meetings into concise, actionable notes
-- **Interview Analysis**: Extract key insights from research interviews or candidate discussions
-- **Conference Notes**: Convert lengthy presentations and panels into digestible summaries
-- **Podcast Transcripts**: Create structured notes from podcast episode transcripts
-- **Research Discussions**: Organize freeform brainstorming into structured insights
+## 🚧 Ongoing Improvements
 
-## 🚧 Limitations & Future Work
+This is an active project that I'm continuously enhancing:
 
-This project is an experimental exploration, not a polished product. Some limitations:
+- Speeding up processing time for longer documents
+- Adding support for more document formats beyond .txt files
+- Implementing local model options for sensitive content
+- Creating templates for specific document types (quarterly reports, product meetings, etc.)
+- Developing integrations with tools like Microsoft Teams
 
-- **Processing Time**: The multi-agent approach takes longer than single-LLM summarization
-- **API Costs**: Using multiple agents means more API calls and higher costs
-- **Occasional Redundancy**: Some information may be repeated across different sections
-- **Integration**: Currently standalone rather than integrated with meeting platforms
+## 🧠 Try Different Strategies!
 
-Future directions we're excited about:
-- Direct integration with Microsoft Teams, Zoom, or Google Meet
-- Expanded speaker analysis to detect sentiment and engagement levels
-- Customizable templates for different meeting types
-- Local LLM support for private/offline use
+Different content types benefit from different division strategies:
 
-## 🙏 Credits & Acknowledgments
-
-This project was built with:
-- [CrewAI](https://github.com/joaomdmoura/crewAI) for agent orchestration
-- [LangChain](https://github.com/hwchase17/langchain) for LLM interactions
-- [Streamlit](https://streamlit.io/) for the user interface
-- [OpenAI](https://openai.com/) for the underlying models
-
-Special thanks to the open source community that made these tools possible!
+- **Meetings & Interviews**: The speaker strategy excels at preserving conversational flow
+- **Articles & Reports**: Try the boundary strategy to respect the author's organization
+- **Complex Technical Content**: Context-aware often produces the most coherent results
+- **Mixed Content**: Compare all strategies side-by-side to find what works best
 
 ## 📜 License
 
@@ -119,6 +109,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-> *"The single biggest problem in communication is the illusion that it has taken place."* — George Bernard Shaw
+> "The art of communication is the language of leadership." — James Humes
 
-Hopefully with SuperScript, your team's communication won't just be an illusion! 🎭✨
+Made with ❤️ to save you time and capture what matters

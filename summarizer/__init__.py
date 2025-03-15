@@ -1,11 +1,9 @@
+"""
+Note Summarizer package for transforming documents into comprehensive summaries.
+"""
+
 from .core import TranscriptSummarizer
 from .options import SummaryOptions
-from .chunking import (
-    chunk_simple, 
-    chunk_by_speaker, 
-    chunk_by_boundary,
-    chunk_context_aware,  # New function
-    chunk_semantic        # New function
-)
+from .division import divide_document, extract_speakers
 
-__all__ = ['TranscriptSummarizer', 'SummaryOptions']
+__all__ = ['TranscriptSummarizer', 'SummaryOptions', 'divide_document', 'extract_speakers']

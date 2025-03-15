@@ -1,14 +1,21 @@
-from abc import ABC, abstractmethod
-import logging
+"""
+Base class for LLM adapters.
+"""
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+from abc import ABC, abstractmethod
 
 class LLMAdapter(ABC):
     """Base class for LLM adapters."""
     
     @abstractmethod
     def generate_completion(self, prompt: str) -> str:
-        """Generate text completion from a prompt."""
+        """
+        Generate text completion from a prompt.
+        
+        Args:
+            prompt: The prompt text
+            
+        Returns:
+            Generated text
+        """
         pass
