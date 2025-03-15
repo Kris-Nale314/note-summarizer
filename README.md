@@ -1,9 +1,15 @@
-# 🎙️ Note-Summarizer: Transform Messy Transcripts into Useful Notes
+<p align="center">
+  <img src="logo.svg" alt="Note-Summarizer Logo" width="250"/>
+</p>
 
-<div align="center">
-  <img src="logo.svg" alt="Note-Summarizer Logo" width="400" height="400">
-</div>
+<h1 align="center">🎙️   Note-Summarizer    📝 </h1>
+<p align="center"><strong>Transform Messy Transcripts into Useful Notes</strong></p>
 
+<p align="center">
+  <a href="https://github.com/kris-nale314/bytemesumai/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
+  <a href="#"><img src="https://img.shields.io/badge/python-3.8%2B-blue" alt="Python"></a>
+  <a href="#"><img src="https://img.shields.io/badge/status-alpha-orange" alt="Development Status"></a>
+</p>
 
 > **Your meeting transcripts deserve better than a quick skim!** ✨
 
