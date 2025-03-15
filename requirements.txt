@@ -3,12 +3,16 @@ streamlit
 crewai
 langchain
 langchain-openai
+langchain-community
 python-dotenv
 nltk
 pyperclip
 wordcloud
 matplotlib
 pandas
+typing-extensions
+matplotlib
+litellm
 
 # OpenAI client
 openai
