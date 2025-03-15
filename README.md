@@ -1,5 +1,10 @@
 # 🎙️ Note-Summarizer: Transform Messy Transcripts into Useful Notes
 
+<div align="center">
+  <img src="logo.svg" alt="Note-Summarizer Logo" width="400" height="400">
+</div>
+
+
 > **Your meeting transcripts deserve better than a quick skim!** ✨
 
 ## 📝 What Is This?
