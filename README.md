@@ -8,7 +8,7 @@
 <p align="center">
   <a href="https://github.com/kris-nale314/bytemesumai/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License"></a>
   <a href="#"><img src="https://img.shields.io/badge/python-3.8%2B-blue" alt="Python"></a>
-  <a href="#"><img src="https://img.shields.io/badge/status-alpha-orange" alt="Development Status"></a>
+  <a href="#"><img src="https://img.shields.io/badge/status-beta-green" alt="Development Status"></a>
 </p>
 
 > **Your meeting transcripts deserve better than a quick skim!** ✨
@@ -29,11 +29,27 @@ I built `Note-Summarizer` to apply advanced AI techniques to this everyday probl
 
 ## 💎 What Makes This Special
 
-- **Intelligent Division Strategies** - Four different approaches to break down documents:
+- **Intelligent Division Strategies** - Five different approaches to break down documents:
   - ✂️ **Basic**: Smart simple division for any document type
   - 🗣️ **Speaker**: Preserves conversation flow and speaker attribution
   - 📑 **Boundary**: Respects document structure like headings and paragraphs
   - 🧠 **Context-Aware**: Maintains semantic coherence and topical relationships
+  - 🔍 **Semantic**: AI-powered chunking that detects natural topic transitions (NEW!)
+
+- **Tiered Processing for Large Documents** - Optimized pipeline for processing very long texts (NEW!)
+  - Uses faster models for initial summarization
+  - Preserves powerful models for final synthesis
+  - Automatically detects when to apply this approach
+
+- **Multi-Document Processing** - Compare and analyze multiple related documents (NEW!)
+  - **Earnings Call Comparisons**: Compare financials across multiple companies
+  - **Sequential Analysis**: Track company performance over multiple quarters
+  - **Cross-Document Synthesis**: Generate insights across related documents
+
+- **Enhanced Visualizations** - Interactive insights to understand your documents (NEW!)
+  - Strategy performance comparisons
+  - Document structure analysis
+  - Smart strategy recommendations
 
 - **Side-by-Side Comparison** - See which strategy works best for your specific content
 
@@ -44,7 +60,7 @@ I built `Note-Summarizer` to apply advanced AI techniques to this everyday probl
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.7+
+- Python 3.8+
 - OpenAI API key
 
 ### Quick Start
@@ -81,11 +97,15 @@ Note-Summarizer uses a modular, extensible architecture:
 
 1. **Smart Document Division** - Rather than arbitrary chunks, the app uses intelligent strategies to divide documents in ways that preserve meaning
 
-2. **LLM-Powered Summarization** - Leverages OpenAI's models with carefully crafted prompts specific to each document type
+2. **Advanced Semantic Processing** - Uses AI embeddings to detect natural topic transitions in documents
 
-3. **Adaptable Processing Pipeline** - Customized approaches for different content types (transcripts, articles, technical documents)
+3. **LLM-Powered Summarization** - Leverages OpenAI's models with carefully crafted prompts specific to each document type
 
-4. **Flexible LLM Integration** - Support for OpenAI models with the ability to extend to other providers via LiteLLM
+4. **Multi-Stage Processing Pipeline** - Optimized approach for different document sizes and complexities
+
+5. **Adaptable Processing Pipeline** - Customized approaches for different content types (transcripts, articles, technical documents)
+
+6. **Flexible LLM Integration** - Support for OpenAI models with the ability to extend to other providers via LiteLLM
 
 ## 💼 Real-World Applications
 
@@ -94,24 +114,17 @@ Note-Summarizer uses a modular, extensible architecture:
 - **Research Synthesis**: Condense interviews and discussions into structured findings
 - **News Monitoring**: Stay on top of industry news without reading every article
 - **Document Review**: Quickly grasp the essence of long reports and documentation
+- **Multi-Company Comparison**: Analyze multiple earnings calls to identify industry trends (NEW!)
+- **Sequential Analysis**: Track changes across multiple quarters or meetings (NEW!)
 
-## 🚧 Ongoing Improvements
-
-This is an active project that I'm continuously enhancing:
-
-- Speeding up processing time for longer documents
-- Adding support for more document formats beyond .txt files
-- Implementing local model options for sensitive content
-- Creating templates for specific document types (quarterly reports, product meetings, etc.)
-- Developing integrations with tools like Microsoft Teams
-
-## 🧠 Try Different Strategies!
+## 🧠 Choosing the Right Strategy
 
 Different content types benefit from different division strategies:
 
 - **Meetings & Interviews**: The speaker strategy excels at preserving conversational flow
 - **Articles & Reports**: Try the boundary strategy to respect the author's organization
 - **Complex Technical Content**: Context-aware often produces the most coherent results
+- **Very Long Documents**: Semantic strategy offers the best topic transitions
 - **Mixed Content**: Compare all strategies side-by-side to find what works best
 
 ## 📜 License

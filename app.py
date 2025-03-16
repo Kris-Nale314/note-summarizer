@@ -775,6 +775,11 @@ def display_single_document_ui():
 def main():
     st.set_page_config(page_title="Note Summarizer", layout="wide")
     
+    # Display centered logo
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("logo.svg", width=150)
+    
     # App title and description
     st.title("🎙️ Note Summarizer 📝")
     st.markdown("""

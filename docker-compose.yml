@@ -1,20 +1,26 @@
 version: '3.8'
 
 services:
-  transcript-analyzer:
+  note-summarizer:
     build: .
-    container_name: transcript-analyzer
+    container_name: note-summarizer
     ports:
       - "8501:8501"
     volumes:
       - ./data:/app/data
-      - ./.env:/app/.env
+      - cache-volume:/app/.cache
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - STREAMLIT_THEME_BASE=light
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8501"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+volumes:
+  cache-volume:
+    name: note-summarizer-cache
