@@ -13,6 +13,8 @@ import re
 import math
 import logging
 from typing import List, Dict, Any, Tuple, Set, Optional
+import numpy as np
+from collections import defaultdict
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -443,5 +445,292 @@ def divide_document(text: str, strategy: str = "basic", min_sections: int = 3,
         return divide_boundary(text, min_sections, target_tokens_per_section)
     elif strategy == "context_aware":
         return divide_context_aware(text, min_sections, target_tokens_per_section)
+    else:  # "basic" or fallback
+        return divide_basic(text, min_sections, target_tokens_per_section, section_overlap)
+
+
+def divide_semantic(text: str, min_sections: int = 3, target_tokens_per_section: int = 25000,
+                   api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    """
+    Semantic division that preserves topic coherence using embedding-based similarity.
+    
+    This approach:
+    1. Breaks text into smaller segments (paragraphs)
+    2. Generates embeddings for each segment
+    3. Uses similarity to group segments into coherent sections
+    4. Ensures sections don't exceed token limits
+    
+    Args:
+        text: Document text
+        min_sections: Minimum number of sections to create
+        target_tokens_per_section: Target tokens per section
+        api_key: OpenAI API key for embeddings (uses env var if None)
+        
+    Returns:
+        List of division dictionaries
+    """
+    logger.info("Starting semantic division")
+    
+    # First, split text into paragraphs
+    paragraphs = _split_into_paragraphs(text)
+    
+    if len(paragraphs) <= min_sections:
+        # Too few paragraphs to do semantic division effectively
+        logger.info(f"Document has only {len(paragraphs)} paragraphs, falling back to context_aware division")
+        from .division import divide_context_aware
+        return divide_context_aware(text, min_sections, target_tokens_per_section)
+    
+    # Generate embeddings for each paragraph
+    try:
+        paragraph_embeddings = _generate_embeddings(paragraphs, api_key)
+    except Exception as e:
+        logger.error(f"Error generating embeddings: {e}")
+        logger.info("Falling back to context_aware division")
+        from .division import divide_context_aware
+        return divide_context_aware(text, min_sections, target_tokens_per_section)
+    
+    # Calculate similarity between adjacent paragraphs
+    similarities = _calculate_similarities(paragraph_embeddings)
+    
+    # Identify potential section boundaries based on similarity drops
+    boundaries = _identify_boundaries(similarities, min_sections, len(paragraphs))
+    
+    # Create sections based on boundaries, ensuring they don't exceed size limits
+    sections = _create_sections_with_size_constraints(
+        paragraphs, boundaries, target_tokens_per_section)
+    
+    # Convert sections to division format
+    divisions = []
+    current_pos = 0
+    
+    for section in sections:
+        section_text = "\n\n".join(section)
+        section_start = text.find(section[0], current_pos)
+        
+        if section_start == -1:
+            # Fallback if exact match fails
+            section_start = current_pos
+        
+        section_end = section_start + len(section_text)
+        current_pos = section_end
+        
+        divisions.append({
+            'start': section_start,
+            'end': section_end,
+            'text': section_text,
+            'strategy': 'semantic'
+        })
+    
+    logger.info(f"Semantic division: {len(divisions)} semantically coherent sections")
+    return divisions
+
+def _split_into_paragraphs(text: str) -> List[str]:
+    """Split text into paragraphs based on double newlines."""
+    # Split by double newline
+    paragraphs = re.split(r'\n\s*\n', text)
+    
+    # Filter out empty paragraphs
+    paragraphs = [p.strip() for p in paragraphs if p.strip()]
+    
+    # Handle case where paragraphs are too large
+    max_paragraph_size = 1000  # Characters
+    result = []
+    
+    for p in paragraphs:
+        if len(p) > max_paragraph_size:
+            # Split large paragraphs into sentences
+            sentences = re.split(r'(?<=[.!?])\s+', p)
+            current_chunk = []
+            current_size = 0
+            
+            for sentence in sentences:
+                if current_size + len(sentence) > max_paragraph_size and current_chunk:
+                    # Add current chunk and start a new one
+                    result.append(' '.join(current_chunk))
+                    current_chunk = [sentence]
+                    current_size = len(sentence)
+                else:
+                    current_chunk.append(sentence)
+                    current_size += len(sentence)
+            
+            if current_chunk:
+                result.append(' '.join(current_chunk))
+        else:
+            result.append(p)
+    
+    return result
+
+def _generate_embeddings(paragraphs: List[str], api_key: Optional[str] = None) -> np.ndarray:
+    """Generate embeddings for paragraphs using OpenAI API."""
+    try:
+        import openai
+        import os
+        import numpy as np
+        
+        # Set API key
+        api_key = api_key or os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError("OpenAI API key not provided and not found in environment variables")
+        
+        client = openai.OpenAI(api_key=api_key)
+        
+        # Process in batches to avoid hitting API limits
+        batch_size = 20
+        batches = [paragraphs[i:i+batch_size] for i in range(0, len(paragraphs), batch_size)]
+        
+        all_embeddings = []
+        for batch in batches:
+            response = client.embeddings.create(
+                input=batch,
+                model="text-embedding-ada-002"
+            )
+            
+            batch_embeddings = [item.embedding for item in response.data]
+            all_embeddings.extend(batch_embeddings)
+        
+        # Convert to numpy array for easier manipulation
+        return np.array(all_embeddings)
+        
+    except ImportError:
+        logger.error("OpenAI package not installed. Install with: pip install openai>=1.0.0")
+        raise
+    except Exception as e:
+        logger.error(f"Error generating embeddings: {e}")
+        raise
+
+def _calculate_similarities(embeddings: np.ndarray) -> List[float]:
+    """Calculate cosine similarity between adjacent paragraph embeddings."""
+    # Calculate similarities between adjacent paragraphs
+    similarities = []
+    
+    for i in range(len(embeddings) - 1):
+        # Cosine similarity between current and next paragraph
+        similarity = np.dot(embeddings[i], embeddings[i+1]) / (
+            np.linalg.norm(embeddings[i]) * np.linalg.norm(embeddings[i+1])
+        )
+        similarities.append(float(similarity))
+    
+    return similarities
+
+def _identify_boundaries(similarities: List[float], min_sections: int, paragraph_count: int) -> List[int]:
+    """
+    Identify section boundaries based on similarity drops.
+    
+    This function finds the places where there's a significant drop in similarity
+    between adjacent paragraphs, suggesting a topic change.
+    """
+    # Calculate target number of sections
+    target_sections = max(min_sections, min(paragraph_count // 5, 10))
+    
+    # Identify significant drops in similarity
+    similarity_drops = []
+    for i, sim in enumerate(similarities):
+        if i > 0 and i < len(similarities) - 1:
+            # Calculate rolling average similarity
+            local_avg = (similarities[i-1] + similarities[i] + similarities[i+1]) / 3
+            
+            # How much this similarity drops compared to local average
+            drop = max(0, local_avg - sim)
+            similarity_drops.append((i+1, drop))  # i+1 is the paragraph index after the drop
+    
+    # Sort by drop size (largest first)
+    similarity_drops.sort(key=lambda x: x[1], reverse=True)
+    
+    # Take the top N-1 drops as boundaries (N = target sections)
+    boundaries = [sd[0] for sd in similarity_drops[:target_sections-1]]
+    
+    # Add the end boundary
+    boundaries.append(paragraph_count)
+    
+    # Sort boundaries in ascending order
+    boundaries.sort()
+    
+    return boundaries
+
+def _create_sections_with_size_constraints(
+    paragraphs: List[str], 
+    boundaries: List[int], 
+    target_tokens_per_section: int
+) -> List[List[str]]:
+    """
+    Create sections from paragraphs using boundaries, ensuring size constraints.
+    
+    This function takes the identified boundaries and adjusts them to ensure
+    no section exceeds the target token size.
+    """
+    # Estimate tokens per paragraph (4 chars per token is a rough approximation)
+    estimated_tokens = [len(p) // 4 for p in paragraphs]
+    
+    # Create initial sections based on boundaries
+    sections = []
+    start = 0
+    
+    for boundary in boundaries:
+        sections.append(paragraphs[start:boundary])
+        start = boundary
+    
+    # Check if any section exceeds the target size and subdivide if needed
+    final_sections = []
+    
+    for section in sections:
+        section_tokens = sum(estimated_tokens[i] for i in range(len(paragraphs)) 
+                            if paragraphs[i] in section)
+        
+        if section_tokens > target_tokens_per_section * 1.2 and len(section) > 3:
+            # Section is too large, subdivide it
+            subsections = []
+            current_subsection = []
+            current_tokens = 0
+            
+            for paragraph in section:
+                para_tokens = len(paragraph) // 4
+                
+                if current_tokens + para_tokens > target_tokens_per_section and current_subsection:
+                    subsections.append(current_subsection)
+                    current_subsection = [paragraph]
+                    current_tokens = para_tokens
+                else:
+                    current_subsection.append(paragraph)
+                    current_tokens += para_tokens
+            
+            # Add the last subsection
+            if current_subsection:
+                subsections.append(current_subsection)
+            
+            final_sections.extend(subsections)
+        else:
+            # Section is fine as is
+            final_sections.append(section)
+    
+    return final_sections
+
+# Update the main divide_document function to include the semantic strategy
+def divide_document(text: str, strategy: str = "basic", min_sections: int = 3, 
+                   target_tokens_per_section: int = 25000, section_overlap: float = 0.1,
+                   api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    """
+    Divide a document using the specified strategy.
+    
+    Args:
+        text: Document text
+        strategy: Division strategy ("basic", "boundary", "speaker", "context_aware", or "semantic")
+        min_sections: Minimum number of sections to create
+        target_tokens_per_section: Target tokens per section
+        section_overlap: Overlap between sections as a fraction of section size
+        api_key: OpenAI API key for embeddings (semantic strategy only)
+        
+    Returns:
+        List of division dictionaries
+    """
+    from .division import divide_speaker, divide_boundary, divide_context_aware, divide_basic
+    
+    if strategy == "speaker":
+        return divide_speaker(text, min_sections, target_tokens_per_section)
+    elif strategy == "boundary":
+        return divide_boundary(text, min_sections, target_tokens_per_section)
+    elif strategy == "context_aware":
+        return divide_context_aware(text, min_sections, target_tokens_per_section)
+    elif strategy == "semantic":
+        return divide_semantic(text, min_sections, target_tokens_per_section, api_key)
     else:  # "basic" or fallback
         return divide_basic(text, min_sections, target_tokens_per_section, section_overlap)

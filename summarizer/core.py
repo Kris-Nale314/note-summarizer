@@ -1,9 +1,10 @@
 """
-Core document summarization engine with multiple division strategies.
+Enhanced core document summarization engine with tiered processing for long documents.
 """
 
 import time
 import logging
+import asyncio
 from typing import List, Dict, Any, Optional
 import os
 
@@ -24,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 class TranscriptSummarizer:
     """
-    Core document summarization engine with multiple division strategies.
+    Enhanced document summarization engine with tiered processing for long documents.
     """
     
     def __init__(self, options: Optional[SummaryOptions] = None):
@@ -61,7 +62,7 @@ class TranscriptSummarizer:
     
     def summarize(self, text: str) -> Dict[str, Any]:
         """
-        Summarize a document using the selected division strategy.
+        Summarize a document using the selected division strategy with tiered processing.
         
         Args:
             text: The document text
@@ -70,6 +71,10 @@ class TranscriptSummarizer:
             Dictionary with summary and metadata
         """
         start_time = time.time()
+        
+        # For very large documents, use tiered processing
+        is_large_document = len(text) > 50000  # Approximately 12.5k tokens
+        use_tiered_processing = is_large_document and "gpt-4" in self.options.model_name
         
         # Divide the document using the selected strategy
         divisions = divide_document(
@@ -85,15 +90,21 @@ class TranscriptSummarizer:
         
         # Process each division
         division_summaries = []
-        for i, division in enumerate(divisions):
-            try:
-                logger.info(f"Processing division {i+1}/{len(divisions)}")
-                summary = self._summarize_division(division, i, len(divisions))
-                division_summaries.append(summary)
-            except Exception as e:
-                logger.error(f"Error summarizing division {i+1}: {e}")
-                # Add placeholder for failed division
-                division_summaries.append(f"Error summarizing division {i+1}: {str(e)}")
+        
+        if use_tiered_processing:
+            logger.info("Using tiered processing for large document")
+            division_summaries = self._process_with_tiered_approach(divisions)
+        else:
+            # Standard approach for smaller documents
+            for i, division in enumerate(divisions):
+                try:
+                    logger.info(f"Processing division {i+1}/{len(divisions)}")
+                    summary = self._summarize_division(division, i, len(divisions))
+                    division_summaries.append(summary)
+                except Exception as e:
+                    logger.error(f"Error summarizing division {i+1}: {e}")
+                    # Add placeholder for failed division
+                    division_summaries.append(f"Error summarizing division {i+1}: {str(e)}")
         
         # Synthesize the final summary
         final_summary = self._synthesize_summary(division_summaries)
@@ -116,12 +127,75 @@ class TranscriptSummarizer:
                 "division_count": len(divisions),
                 "division_strategy": self.options.division_strategy,
                 "model": self.options.model_name,
-                "processing_time_seconds": processing_time
+                "processing_time_seconds": processing_time,
+                "tiered_processing": use_tiered_processing
             }
         }
         
         return result
     
+    def _process_with_tiered_approach(self, divisions: List[Dict[str, Any]]) -> List[str]:
+        """
+        Process divisions using a tiered approach with different models for efficiency.
+        
+        Args:
+            divisions: List of division dictionaries
+            
+        Returns:
+            List of division summaries
+        """
+        division_summaries = []
+        
+        # Store original model
+        original_model = self.llm_client.model
+        
+        try:
+            # Use faster model for initial summaries if using a powerful model
+            if "gpt-4" in original_model:
+                # Switch to faster model for initial summarization
+                logger.info(f"Switching to gpt-3.5-turbo-16k for initial summaries (from {original_model})")
+                self.llm_client.model = "gpt-3.5-turbo-16k"
+            
+            # First pass: Process each division with simpler prompts and faster model
+            for i, division in enumerate(divisions):
+                try:
+                    logger.info(f"Tier 1: Processing division {i+1}/{len(divisions)}")
+                    # Use a simpler prompt focused on factual extraction
+                    strategy = division.get('strategy', 'basic')
+                    
+                    prompt = f"""Extract the key information from this section ({i+1}/{len(divisions)}) of a document.
+                    
+                    Focus ONLY on:
+                    1. Main facts, points, and arguments
+                    2. Important details and data
+                    3. Key decisions or conclusions
+                    
+                    Be thorough but concise. Prioritize accuracy and completeness.
+                    
+                    SECTION TEXT:
+                    {division['text']}
+                    """
+                    
+                    # Generate the first-tier summary
+                    summary = self.llm_client.generate_completion(prompt)
+                    division_summaries.append(summary)
+                    
+                except Exception as e:
+                    logger.error(f"Error in tier 1 summary for division {i+1}: {e}")
+                    division_summaries.append(f"Error summarizing division {i+1}: {str(e)}")
+            
+            # Return to original model for final synthesis (handled by caller)
+            self.llm_client.model = original_model
+            logger.info(f"Switched back to {original_model} for synthesis")
+            
+        except Exception as e:
+            # Make sure we restore the original model even if there's an error
+            self.llm_client.model = original_model
+            logger.error(f"Error in tiered processing: {e}")
+            raise
+            
+        return division_summaries
+        
     def _summarize_division(self, division: Dict[str, Any], index: int, total: int) -> str:
         """
         Summarize a single division using a strategy-appropriate prompt.
