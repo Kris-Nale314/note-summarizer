@@ -11,7 +11,8 @@ import re
 import numpy as np
 import pandas as pd
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
+from pathlib import Path
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
@@ -23,6 +24,141 @@ from multi_document_ui import display_multi_document_ui, display_multi_document_
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+def auto_save_results(title: str, strategy: str, content: Dict[str, Any], document_info: Dict[str, Any] = None) -> str:
+    """
+    Automatically save processing results to the outputs folder.
+    
+    Args:
+        title: Document title
+        strategy: Strategy used (or 'comparison' for multiple strategies)
+        content: Result content
+        document_info: Optional document metadata
+    
+    Returns:
+        Path to saved file
+    """
+    # Clean the title to make it file-system friendly
+    safe_title = "".join(c if c.isalnum() or c in ['.', '-', '_'] else '_' for c in title)
+    
+    # Get current date in YYYY-MM-DD format
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    
+    # Create filename in format: Title_Strategy_YYYY-MM-DD.md
+    filename = f"{safe_title}_{strategy}_{date_str}.md"
+    
+    # Ensure outputs directory exists
+    output_dir = Path("outputs")
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True, exist_ok=True)
+    
+    file_path = output_dir / filename
+    
+    # Create markdown content based on content type
+    if strategy == "comparison":
+        # It's a strategy comparison
+        markdown = f"# {title} - Strategy Comparison\n\n"
+        markdown += f"*Generated on: {date_str}*\n\n"
+        
+        # Add document info if available
+        if document_info:
+            markdown += "## Document Information\n\n"
+            markdown += f"- Characters: {document_info.get('num_characters', 'N/A'):,}\n"
+            markdown += f"- Words: {document_info.get('num_words', 'N/A'):,}\n"
+            markdown += f"- Speakers: {document_info.get('num_speakers', 'N/A')}\n\n"
+        
+        # Add comparison table
+        markdown += "## Strategy Comparison\n\n"
+        markdown += "| Strategy | Processing Time | Divisions | Summary Length |\n"
+        markdown += "|----------|-----------------|-----------|----------------|\n"
+        
+        for strat, result in content.items():
+            processing_time = f"{result.get('processing_time', 0):.2f}s"
+            divisions = result.get('division_count', 0)
+            summary_length = len(result.get('summary', ''))
+            markdown += f"| {strat} | {processing_time} | {divisions} | {summary_length:,} chars |\n"
+        
+        markdown += "\n"
+        
+        # Add each strategy's summary
+        markdown += "## Strategy Summaries\n\n"
+        for strat, result in content.items():
+            markdown += f"### {strat.capitalize()} Strategy\n\n"
+            markdown += result.get("summary", "No summary available") + "\n\n"
+            markdown += "---\n\n"
+            
+    elif strategy in ["earnings_calls_multi_company", "earnings_calls_sequential", "generic_documents"]:
+        # It's a multi-document analysis
+        markdown = f"# {title}\n\n"
+        markdown += f"*Generated on: {date_str}*\n\n"
+        
+        # Add document collection info if available
+        if "metadata" in content:
+            markdown += "## Analysis Information\n\n"
+            
+            doc_type = content["metadata"].get("document_type", "Generic")
+            if doc_type == "earnings_calls_multi_company":
+                markdown += "**Analysis Type:** Multi-Company Earnings Call Comparison\n"
+                if "companies" in content["metadata"]:
+                    markdown += f"**Companies:** {', '.join(content['metadata']['companies'])}\n"
+            elif doc_type == "earnings_calls_sequential":
+                markdown += "**Analysis Type:** Sequential Earnings Call Analysis\n"
+                if "company" in content["metadata"]:
+                    markdown += f"**Company:** {content['metadata']['company']}\n"
+                if "periods" in content["metadata"]:
+                    markdown += f"**Periods:** {', '.join(content['metadata']['periods'])}\n"
+            else:
+                markdown += "**Analysis Type:** Multi-Document Synthesis\n"
+            
+            markdown += f"**Documents Analyzed:** {content['metadata'].get('document_count', 'N/A')}\n"
+            markdown += f"**Processing Time:** {content['metadata'].get('processing_time_seconds', 'N/A'):.2f} seconds\n\n"
+        
+        # Add main analysis
+        if "summary" in content:
+            markdown += content["summary"] + "\n\n"
+        
+        # Add action items if available
+        if "action_items" in content and content["action_items"]:
+            if not content["action_items"].startswith("#"):
+                markdown += "## Action Items\n\n"
+            markdown += content["action_items"] + "\n\n"
+            
+    else:
+        # It's a single strategy summary
+        markdown = f"# {title} ({strategy} strategy)\n\n"
+        markdown += f"*Generated on: {date_str}*\n\n"
+        
+        # Add document info if available
+        if document_info:
+            markdown += "## Document Information\n\n"
+            markdown += f"- Characters: {document_info.get('num_characters', 'N/A'):,}\n"
+            markdown += f"- Words: {document_info.get('num_words', 'N/A'):,}\n"
+            markdown += f"- Speakers: {document_info.get('num_speakers', 'N/A')}\n\n"
+        
+        # Add processing info if available
+        if "metadata" in content:
+            markdown += "## Processing Information\n\n"
+            markdown += f"- Division Strategy: {content['metadata'].get('division_strategy', 'N/A')}\n"
+            markdown += f"- Model: {content['metadata'].get('model', 'N/A')}\n"
+            markdown += f"- Processing Time: {content['metadata'].get('processing_time_seconds', 'N/A'):.2f} seconds\n"
+            markdown += f"- Division Count: {content['metadata'].get('division_count', 'N/A')}\n\n"
+        
+        # Add summary
+        if "summary" in content:
+            markdown += content.get("summary", "") + "\n\n"
+        
+        # Add action items if available
+        if "action_items" in content and content["action_items"]:
+            if not content["action_items"].startswith("#"):
+                markdown += "## Action Items\n\n"
+            markdown += content["action_items"] + "\n\n"
+    
+    # Write to file
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(markdown)
+    
+    logger.info(f"Results saved to {file_path}")
+    return str(file_path)
 
 def safe_copy_to_clipboard(text):
     """Safely copy text to clipboard with error handling."""
@@ -380,6 +516,11 @@ def run_all_strategies(transcript_content: str, base_options: SummaryOptions, do
     progress_bar.progress(1.0)
     status_text.text("Comparison complete!")
     
+    # Auto-save the comparison results
+    title = document_info.get("title", "Document_Comparison")
+    file_path = auto_save_results(title, "comparison", results, document_info)
+    logger.info(f"Strategy comparison saved to {file_path}")
+    
     return results
 
 def process_single_document(document_content: str, options: Dict[str, Any]):
@@ -394,7 +535,8 @@ def process_single_document(document_content: str, options: Dict[str, Any]):
         'num_characters': options["num_characters"],
         'num_words': options["num_words"],
         'num_speakers': options["num_speakers"],
-        'speakers': options["speakers"]
+        'speakers': options["speakers"],
+        'title': options.get("title", "Document Summary")
     }
     
     # Set up the summarization options
@@ -418,6 +560,9 @@ def process_single_document(document_content: str, options: Dict[str, Any]):
                 
                 # Create tabs for results
                 strategy_tabs = st.tabs(list(results.keys()) + ["📊 Analysis"])
+                
+                # Show the auto-save notification
+                st.success(f"✅ Comparison automatically saved to outputs folder")
                 
                 # Process each strategy tab
                 for i, strategy in enumerate(results.keys()):
@@ -488,6 +633,9 @@ def process_single_document(document_content: str, options: Dict[str, Any]):
                 result = summarizer.summarize(document_content)
                 elapsed_time = time.time() - start_time
                 
+                # Auto-save the summary
+                file_path = auto_save_results(options["title"], options["division_strategy"], result, document_info)
+                
                 # Create tabs for summary and details
                 tabs = st.tabs(["📝 Summary", "✅ Action Items", "📊 Analysis"])
                 
@@ -504,6 +652,9 @@ def process_single_document(document_content: str, options: Dict[str, Any]):
                     # Display summary
                     st.markdown("### Summary")
                     st.markdown(result["summary"])
+                    
+                    # Show auto-save notification
+                    st.success(f"✅ Summary automatically saved to outputs folder")
                     
                     # Export options
                     col1, col2 = st.columns(2)
@@ -614,6 +765,10 @@ def display_single_document_ui():
         # Extract speakers for display
         speakers = extract_speakers(document_content)
         num_speakers = len(speakers)
+        
+        # Get document title - default to filename without extension
+        default_title = os.path.splitext(uploaded_file.name)[0]
+        document_title = st.text_input("Document Title", value=default_title)
         
         # Document display
         with st.expander("View Uploaded Document"):
@@ -734,7 +889,8 @@ def display_single_document_ui():
             "num_characters": num_characters,
             "num_words": num_words,
             "num_speakers": num_speakers,
-            "speakers": speakers
+            "speakers": speakers,
+            "title": document_title  # Include the document title
         }
         
         # Process document if button clicked
@@ -772,13 +928,66 @@ def display_single_document_ui():
               (ideal for very long documents, but requires API calls for embedding generation)
             """)
 
-def main():
-    st.set_page_config(page_title="Note Summarizer", layout="wide")
+def list_saved_outputs():
+    """
+    List all saved outputs in the outputs directory.
     
-    # Display centered logo
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.image("logo.svg", width=150)
+    Returns:
+        List of file paths
+    """
+    output_dir = Path("outputs")
+    if not output_dir.exists():
+        return []
+    
+    files = []
+    for file in output_dir.glob("*.md"):
+        files.append(str(file))
+    
+    return sorted(files, reverse=True)  # Newest first
+
+def display_outputs_browser():
+    """Display a simple browser for saved outputs."""
+    st.markdown("## Saved Outputs")
+    
+    # List all saved outputs
+    output_files = list_saved_outputs()
+    
+    if not output_files:
+        st.info("No saved outputs found. Process documents and save the results!")
+        return
+    
+    # Create a list of file names for the select box
+    file_names = [os.path.basename(f) for f in output_files]
+    
+    # Let the user select a file
+    selected_file = st.selectbox("Select output to view", file_names)
+    
+    if selected_file:
+        # Get the full path of the selected file
+        selected_path = os.path.join("outputs", selected_file)
+        
+        try:
+            # Read the file content
+            with open(selected_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            
+            # Display the content
+            st.markdown(content)
+            
+            # Provide download button
+            st.download_button(
+                label="Download Markdown",
+                data=content,
+                file_name=selected_file,
+                mime="text/markdown"
+            )
+            
+        except Exception as e:
+            st.error(f"Error reading file: {str(e)}")
+
+def main():
+    """Main application entry point with auto-save functionality."""
+    st.set_page_config(page_title="Note Summarizer", layout="wide")
     
     # App title and description
     st.title("🎙️ Note Summarizer 📝")
@@ -787,8 +996,8 @@ def main():
     Process single documents or analyze multiple related documents with comparative insights.
     """)
     
-    # Create tabs for single and multi-document processing
-    tabs = st.tabs(["📄 Single Document", "📚 Multiple Documents"])
+    # Create tabs for single document, multi-document, and outputs
+    tabs = st.tabs(["📄 Single Document", "📚 Multiple Documents", "💾 Outputs"])
     
     # Single document tab
     with tabs[0]:
@@ -849,12 +1058,45 @@ def main():
                     # Add original documents to result for visualization
                     result["documents"] = documents
                     
+                    # Auto-save the multi-document analysis
+                    try:
+                        # Generate automatic title based on document type
+                        if "metadata" in result and "document_type" in result["metadata"]:
+                            doc_type = result["metadata"]["document_type"]
+                            if doc_type == "earnings_calls_multi_company" and "companies" in result["metadata"]:
+                                companies = result["metadata"]["companies"]
+                                if len(companies) <= 3:
+                                    auto_title = f"{'-'.join(companies)}_comparison"
+                                else:
+                                    auto_title = f"{len(companies)}-companies_analysis"
+                            elif doc_type == "earnings_calls_sequential" and "company" in result["metadata"]:
+                                company = result["metadata"]["company"]
+                                auto_title = f"{company}_sequential"
+                            else:
+                                auto_title = "multi-document_analysis"
+                        else:
+                            auto_title = "multi-document_analysis"
+                        
+                        # Store the analysis
+                        file_path = auto_save_results(auto_title, result["metadata"]["document_type"], result)
+                        logger.info(f"Analysis automatically saved to {file_path}")
+                        
+                    except Exception as e:
+                        logger.error(f"Error auto-saving analysis: {e}")
+                    
                     # Display the results
                     display_multi_document_results(result, processing_time)
+                    
+                    # Show auto-save notification
+                    st.success(f"✅ Analysis automatically saved to outputs folder")
                     
                 except Exception as e:
                     st.error(f"Error processing documents: {str(e)}")
                     logger.error(f"Multi-document processing error: {e}", exc_info=True)
+    
+    # Outputs tab
+    with tabs[2]:
+        display_outputs_browser()
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,959 @@
+"Dell Technologies Inc. designs, develops, manufactures, markets, sells, and supports information 
+technology (IT) solutions, products, and services worldwide. The company operates through three segments: 
+Infrastructure Solutions Group (ISG), Client Solutions Group (CSG), and VMware. The ISG segment provides 
+traditional and next-generation storage solutions; and rack, blade, tower, and hyperscale servers. This 
+segment also offers networking products and services that help its business customers to transform and 
+modernize their infrastructure, mobilize and enrich end-user experiences, and accelerate business 
+applications and processes; attached software and peripherals; and support and deployment, configuration, 
+and extended warranty services. The CSG segment provides desktops, workstations, and notebooks; 
+displays and projectors; attached and third-party software and peripherals, as well as support and 
+deployment, configuration, and extended warranty services. The VMware segment supports customers in the 
+areas of hybrid and multi-cloud, modern applications, networking, security, and digital workspaces, helping 
+customers to manage IT resource across private clouds and complex multi-cloud, multi-device 
+environments. Dell Technologies Inc. also provides information security; and cloud software and 
+infrastructure-as-a-service solutions that enable customers to migrate, run, and manage mission-critical 
+applications in cloud-based IT environments. The company was formerly known as Denali Holding Inc. and 
+changed its name to Dell Technologies Inc. in August 2016. Dell Technologies Inc. was founded in 1984 and 
+is headquartered in Round Rock, Texas."
+
+"Operator: Good afternoon and welcome to the Fiscal Year 2025 Fourth Quarter Financial Results 
+Conference Call for Dell Technologies Inc. I'd like to inform all participants that this call is being recorded at 
+the request of Dell Technologies. This broadcast is a copyrighted property of Dell Technologies Inc. Any 
+rebroadcast of this information in whole or part without the prior written permission of Dell Technologies is 
+prohibited. [Operator Instructions] I'd like to turn the call over to Paul Frantz, Head of Investor Relations. Mr. 
+Frantz, you may begin.\nPaul Frantz: Thanks, everyone, for joining us. With me today are Jeff Clarke, Yvonne 
+McGill and Tyler Johnson. Our earnings materials are available on our IR website, and I encourage you to 
+review those materials. Also, please take some time to review the presentation, which includes additional 
+content to complement our discussion this afternoon. Guidance will be covered on today's call. During this 
+call, unless otherwise indicated, all references to financial metrics refer to GAAP financial measures, 
+including non- GAAP gross margin, operating expenses, operating income, net income, diluted earnings per 
+share, free cash flow and adjusted free cash flow. A reconciliation of these measures to the most directly 
+comparable GAAP measures can be found in our web deck and our press release. Growth percentages refer 
+to year-over-year change unless otherwise specified. Statements made during this call that relate to future 
+results and events are forward-looking statements based on current expectations. Actual results and events 
+could differ materially from those projected due to a number of risks and uncertainties, which are discussed 
+in our web deck and SEC filings. We assume no obligation to update our forward-looking statements. Now I'll 
+turn it over to Jeff.\nJeff Clarke: Thanks, Paul, and thanks, everyone, for joining us. I am proud of the team's 
+execution this year. We navigated an incredibly dynamic AI environment and accelerating server 
+consolidation, a significant pivot to Dell IP storage and a lagging PC refresh and delivered results above our 
+long-term value-creation framework. We grew our company while reducing our operating expenditures over 
+the course of the year. Our modernization have made us more efficient and provided us the ability to invest 
+more innovation and in areas of strategic differentiation. Our FY '25 revenue was $95.6 billion, up 8%, with 
+operating income of $8.5 billion. OpEx was reduced by 4% over the course of the year. This resulted in record 
+EPS of $8.14, up 10%, and cash flow of $4.5 billion. We continue to differentiate ourselves with consistent 
+performance through numerous economic cycles, different technology buying and adoption cycles and our 
+rapidly innovating technology ecosystem. Some examples of the innovation from this past year. We added 
+five platforms to our AI-optimized portfolio, including support of the oil architectures, the highlight being the 
+PowerEdge XE9712 supporting NVIDIA's NVL72 GB200, which we were the first to ship in the world. We 
+launched the Dell Infrastructure Rack Sobel system, our IR7000 and 5000 in both 21-inch and 19-inch 
+versions, providing up to 96 GPUs in a rack and 786 GPUs in a scalable unit. We have made significant 
+advancements of CPUs, cold plates metals and power distribution with our IR7000 supporting up to 480 
+kilowatts per rep. We introduced our direct-to-chip liquid cooling version of the 9680, providing 33% density 
+improvement and 2.5x improvement in energy efficiency. We made significant advancements to PowerStore 
+with PowerStore Prime, our mid-range storage solution addressing the fastest-growing portion of the market. 
+And we introduced the PowerScale F910 and F710 in our unstructured portfolio that is prime to support 
+unstructured and AI workloads. We introduced the most Copilot+ PCs powered by ARM-based Qualcomm 
+Snapdragon processors and also launched the broadest portfolio of Intel Meteor Lake commercial PCs, 
+furthering our number one leadership position in commercial AI PCs worldwide. We continued our number 
+one leadership in PC monitors with the world's first 4k monitors to achieve 5-star Eye Comfort certification. 
+focused on expanding our peripherals portfolio selling everything around the PC docking stations, cameras, 
+mice, keyboards and headsets, including the first and only holistic solution to manage your fleet of PCs and 
+peripherals remotely, creating the best possible customer experience. And finally, we simplified our 
+branding, redesigned our PC portfolio and broadened our silicon options across Intel, AMD and Qualcomm, 
+setting us up well for the PC refresh. We are extremely well positioned to capture growth across every 
+segment of our business and extend AI from the largest at-scale CSPs to enterprise workloads and out to the 
+edge with the PC. These tailwinds and our unique operating model that leverages our leading product 
+positions, our go-to-market engine, services and supply chain, underpin our confidence that our opportunity 
+continues to grow as we look ahead to FY '26. Moving to Q4. Revenue was $23.9 billion, up 7%, driven by a 
+robust ISG growth. We executed particularly strong with substantial operating margin improvement in ISG 
+driven by our Dell IP storage portfolio. This resulted in EPS of $2.68, up 18%, growing faster than revenue. 
+Turning to BU results. Let's start with ISG. The prospects for AI are strong, and we are very well positioned. In 
+Q4, AI orders demand was $1.7 billion with $2.1 billion in shipments in order with $4.1 billion in backlog as 
+customers work through technology changes. And in February, our partnership with XAI and other customers 
+continued. We booked deals putting our AI backlog at roughly $9 billion as of today. Our pipeline expanded 
+sequentially and has grown every quarter since the introduction of the 9680. We are seeing continued 
+progress in AI from enterprise customers, albeit still earlier in their journey with sequential growth in both 
+orders and customers. And our engineering services, financing and ability to optimize density and 
+performance per watt are important differentiators for the largest at-scale CSPs and provide very efficient 
+enterprise solutions. In traditional servers, the growth trajectory continues, up double digits in Q4. We've now 
+seen 5 quarters of year-over-year demand. Our mix of 16G servers continues to increase as customers 
+remain focused on consolidation to improve power efficiency and increase floor space. The server 
+consolidation in the data center is expanding server TRUs driven by service with more CPU cores, storage and 
+memory. In storage, we saw P&L growth for the second consecutive quarter with very strong profitability 
+driven by our Dell IP storage portfolio. PowerStore, our flagship midrange product, has had strong demand 
+growth for four consecutive quarters, the most recent three at double-digit demand growth. As I mentioned, 
+the software and hardware updates we made with PowerStore Prime resonate with customers and partners. 
+We have industry-leading 5:1 data reduction, delivered 30% improvement in IOPS Native MetroSync and QLC 
+availability. We also saw double-digit demand growth in PowerScale, our leading unstructured storage 
+platform, and continued growth in our buyer base with PowerFlex. We are well positioned in some of the 
+fastest-growing categories within storage as customers shift towards disaggregated architectures. In CSG, 
+we are seeing the recovery coming with strength in SMB, which historically is a leading indicator. We also saw 
+large opportunities within the quarter, which were very competitive. Commercial was up 5%, marking the 
+second consecutive quarter of year-over-year growth and the fourth consecutive quarter of demand growth. 
+Consistent with what we saw coming out of Q3, customers are waiting to refresh to buy AI PCs that future-
+proof their purchases going forward. Consumer continues to be challenged with softer demand and elevating 
+levels of discounting. We expect a broader PC refresh this year as the installed base continues to age, we get 
+closer to the Windows 10 end of life and AI PCs are more broadly available. To close, I am proud of our FY '25 
+results and our ability to execute our strategy, leveraging our strengths to extend our leadership positions and 
+capture new growth. The AI hardware and services TAM has nearly doubled over the course of the year to 
+$295 billion in 2027, growing at a 33% CAGR. We are well positioned in AI, traditional servers, storage with 
+our focus on Dell IP and PCs, including everything around the device. We continue to drive a disproportionate 
+level of AI growth by demonstrating the value we provide to our customers and I'm excited for the tailwinds 
+surrounding our business as we enter FY '26. Now over to Yvonne for more details about Q4.\nYvonne McGill: 
+Thanks, Jeff. Let me begin with an overview of our Q4 performance, then I'll move to ISG, CSG cash and 
+guidance. In the fourth quarter, we delivered strong profitability, specifically in ISG. Our total revenue was up 
+7% to $23.9 billion. This was driven by continued strength in servers. Our combined ISG and CSG business 
+grew 10%. Gross margin was $5.8 billion or 24.3% of revenue. This is down 50 basis points due to a more 
+competitive pricing environment, predominantly in CSG and an increase in our AI-optimized server mix. 
+Within gross margin, we discovered previously unrecognized accumulated credits from suppliers. You'll find 
+revised financial results within our Q4 press release that reflect higher gross margin and increased earnings 
+per share for the relevant period. Operating expense was down 6% to $3.1 billion or 13.1% of revenue. FY '25 
+was a transformative year as we reevaluated, reimagined and modernized how we operate. This enabled us 
+to unlock efficiencies and increase productivity, all while growing our core business double digits. Now let's 
+look at operating income. We delivered a 22% increase to $2.7 billion or 11.2% of revenue. This was driven by 
+higher revenue and lower operating expenses, partially offset by a decline in our gross margin rate. Q4 net 
+income was up 15% to $1.9 billion primarily driven by stronger operating income. And our diluted EPS was up 
+18% to $2.68. Now let's move to ISG, where we delivered another quarter of strong performance. ISG revenue 
+was $11.4 billion, up 22%. Servers and networking revenue was a Q4 record at $6.6 billion, up 37%. We 
+continue to see strong demand across both AI and traditional servers. Storage revenue was up 5% to $4.7 
+billion, a second consecutive quarter of growth. We executed very well in storage. We had a record demand 
+quarter for PowerStore. PowerScale grew double digits, and our PowerFlex buyer base grew. While the overall 
+demand environment is lagging that of traditional servers, we see some promising trends. We had record ISG 
+operating income of $2.1 billion, up 44%. This was driven primarily by higher revenue. Our ISG operating 
+income rate was up again sequentially to a record 18.1% of revenue. The rate improvement of 480 basis 
+points was the result of improved gross margins, especially in storage, and reduced operating expense. 
+Within storage, we saw record profitability driven by a higher mix of Dell IP versus partner IP, improved 
+product profitability and revenue scaling in what is seasonally our strongest quarter. Now let's turn to CSG. 
+CSG revenue was up 1% to $11.9 billion. Commercial revenue was up 5% to $10 billion, while consumer 
+revenue was down 12% to $1.9 billion. CSG operating income was $0.6 billion or 5.3% of revenue. This is 
+down 90 basis points sequentially due to a more competitive pricing environment. We saw some promising 
+signs as we went through November and December with pockets of strength in large deals, but overall saw a 
+slowdown in January. As Jeff mentioned, we saw strength in small and medium business, which is historically 
+a leading indicator. Profitability in commercial was weaker than expected as demand continued to push into 
+the next fiscal year. In consumer, the demand environment remains soft and profitability remains 
+challenged. We are ready and well positioned for a PC refresh with our simplified rebrand, leading go-to-
+market engine and focus on commercial PCs, the most profitable segments of the market. Shifting gears, 
+Dell Financial Services continues to drive differentiated payment solutions for our customers. We exited the 
+year with a record $15 billion in assets under management, up 5%. And when you normalize for the exit of our 
+VMware resell business and the discontinuation of our commercial revolving product, DFS originations were 
+up 7% in Q4 with a strong attach rate across the business. Now let's move to cash flow and the balance 
+sheet. Q4 cash flow from operations was $0.6 billion. This was primarily driven by profitability, partially offset 
+by working capital. Our cash conversion cycle was negative 31 days with $6.7 billion in inventory. We ended 
+the quarter with $5.2 billion in cash and investments, down $1.4 billion sequentially. Our core leverage ratio 
+was down sequentially to 1.2x. We returned $1.1 billion of capital to shareholders with 6.4 million shares of 
+stock repurchased at an average price of $117.51 and paid a dividend of $0.45 per share. Since our capital 
+reaching program began at the beginning of FY '23, we've returned $10.8 billion to shareholders through stock 
+repurchases and dividends. We announced an 18% increase in our annual dividend to $2.10 per share, well 
+above our long-term value-creation framework. Additionally, the Board of Directors has approved a $10 
+billion increase in our share repurchase authorization. This is a testament to our confidence in the business 
+and our ability to generate strong cash flow. Turning to FY '26 guidance. IT spending is expected to grow with 
+3 underlying trends that we see. First, businesses are leveraging AI to enable competitive advantages, and we 
+are seeing that in our opportunity pipeline that continues to expand. Second, data center modernization is 
+well underway with a focus on consolidation and power efficiency. Third, customers are planning to refresh 
+their PC installed base with AI-enabled devices. As these trends materialize, we will leverage our operating 
+model that has driven value creation over the last 40 years. Against that backdrop, we expect revenue and 
+EPS growth in FY '26 above our long-term value-creation framework. We expect FY '26 revenue to be between 
+$101 billion and $105 billion with a midpoint of $103 billion, up 8%. We expect ISG to grow high teens driven 
+by $15 billion of AI server shipments and continued growth in traditional server and storage. And we expect 
+CSG to grow low to mid-single digits, more weighted towards the second half of the year. We expect the 
+combination of ISG and CSG to grow 10% at the midpoint. Given the higher mix of our AI-optimized servers 
+and the current competitive environment, we expect our gross margin rate to decline roughly 100 basis 
+points. As our modernization efforts continue, we expect OpEx to be down low single digits year-over-year. 
+We expect ISG operating income rate to be roughly flat year-over-year with CSG down slightly. We expect I&O 
+to be between $1.4 billion and $1.5 billion. Diluted non-GAAP EPS is expected to be $9.30 plus or minus 
+$0.25, up 14% at the midpoint, assuming an annual non-GAAP tax rate of 18%. For Q1, we expect revenue to 
+be between $22.5 million and $23.5 billion, up 3% at the midpoint of $23 billion. ISG and CSG combined are 
+expected to grow 6% at the midpoint with ISG growing low teens and CSG flat year-over-year. Gross margin 
+rate will be lower sequentially given seasonally lower storage mix and a higher AI-optimized server mix. OpEx 
+will be down low single digits year-over-year. We expect operating income rate to be down sequentially given 
+typical seasonality in ISG with lower storage mix. We expect our diluted share count to be between 706 
+million and 710 million shares, and our diluted non-GAAP EPS is expected to be $1.65 plus or minus $0.10, 
+up 25% at the midpoint. In closing, we delivered solid FY '25 results, well above our long-term value-creation 
+framework. We generated $95.6 billion in revenue, record EPS of $8.14 and returned $3.9 billion of capital to 
+our shareholders. We executed our strategy and expanded our lead in AI while positioning our core business 
+for the opportunity ahead. Internally, we began a transformation to future-proof the company, focusing on 
+supplying, automating and modernizing how we work. And as we look forward, I'm excited about the 
+sustainable growth we see and the value we will continue to deliver to our customers and our shareholders. 
+Now I'll turn it back to Paul to begin Q&A.\nPaul Frantz: Thanks, Yvonne. Let's get to Q&A. In order to ensure 
+we get to as many of as possible, please ask one concise question. Let's go to the first question, 
+operator.\nOperator: [Operator Instructions]. And the first question comes from Wamsi Mohan with Bank of 
+America.\nWamsi Mohan: Yes, thank you so much. Yvonne, could you talk through the fiscal '26 guide? And 
+what sort of maybe some of the assumptions that are incorporated beyond what you stated? Your revenues 
+are going to be up roughly in total about 7.7%, EPS up about 14%. But your comments on ISG and CSG 
+margins are flat to down, and you noted a fairly competitive environment. So can you just bridge those sort of 
+comments to your EPS growth? How much is coming potentially from buybacks? And have you made any 
+tariff-related assumptions in these margin guides? Thank you so much.\nYvonne McGill: Thanks, Wamsi. So 
+yes, in the guide for the year, we guided to the $103 billion of midpoint, up 8%, with everything growing, right? 
+ISG and CSG expected to be up combined about 10%. If I look at ISG, which I think some of your question is 
+coming from, we expect that to be in the high teens, fueled by that $15 billion of AI server shipments that we 
+referred to as well as continued growth in both traditional server and storage, I'd say with storage in the low 
+single digits. CSG, we do expect to grow in the mid-single digits coming up for the year that's just begun with 
+that refresh cycle that we're expecting to be more weighted towards the second half of the year. OpEx is 
+another area. We guided to it being down low single digits year-over-year. That's just a continuation of all of 
+the efficiencies that we're driving across the entire company. And then the improving year-over-year to the 
+9.1%, up from 8.9%, so an improvement there. When I think of what to expect from an ISG standpoint from an 
+offing level, we're saying roughly flat year-over-year. And we expect there to be continued competition, I 
+guess, is the right way to put it in CSG. But again, we've guided and embedded that in there. And I go back to 
+ISG real quick and say, hey, we are going to be growing the AI business while continuing to drive profitability 
+there. So we'll continue to balance, as we have been doing, our growth and profitability. And we're going to 
+manage pricing, we're going to manage the competitive environment, and we're going to continue to drive 
+value for our shareholders.\nJeff Clarke: Thanks, Wamsi.\nOperator: And the next question comes from Erik 
+Woodring with Morgan Stanley.\nErik Woodring: Great guys, thanks so much for taking my question. Jeff, a 
+question I often get from investors is kind of about the risk of ODM encroachment in the AI server market. As 
+customers get more sophisticated over time, competition intensifies, potentially margins face downward 
+pressure. Effectively, the concern is AI servers become somewhat of a cloud 2.0 type of disintermediation. 
+Clearly, your AI server backlog helps to refute this concern. But I would love if you could just maybe -- how 
+would you respond to those concerns if you got that question? Thanks so much.\nJeff Clarke: Sure. Thanks, 
+Erik. I mean, do we see the ODMs in these large opportunities? Of course, we do. These are multibillion-
+dollar opportunities. Everybody tends to show up and wants an opportunity to win the business. When I step 
+back and reflect why Dell and why we continue to be optimistic here is this is custom work. It takes 
+significant engineering capability. It takes significant architecture capability to win. And in many cases, we're 
+building a unique and differentiated solution for each and every customer. And our customers have learned 
+to value what we've been able to bring to them across their deployments, whether that is the service side 
+when we extend beyond an L10 server out of the factory with L11 and L12 and full integration of Iraq, on the 
+network expertise we bring to do the install and deployment of very complex network arrays. When I think 
+about service, the ability that we have a global service footprint, professional servers can show up anywhere 
+to solve any related problem or hands-on in these very large deployments with full-time teams. Literally, 
+they're 24/7 trying to get them up and running. I think about the financing capabilities that we have in our 
+company and the ability to help these CSPs, these fast- growing companies grow at the rates they want with 
+our financing capabilities, I think about our go-to-market coverage and I think about the expertise we have in 
+the top 30-or-so CSPs digital natives, our ability to scale this to enterprise. Erik, every time I look at this 
+question, and I don't really focus on ODMs or for that matter, other OEMs. I look at the differentiated value we 
+are bringing to the marketplace with the Dell company bringing end-to-end solutions. And right now, it's 
+valued. And right now, we continue to differentiate. Right now, we help these large scale clusters get 
+deployed faster than anybody else. I'll remind you, I probably did last time as well, we were the first to bring to 
+market a GB200 rack. That's not by luck. It's by a lot of hard work, detailed engineering, collaborating in this 
+case with NVIDIA and our customer to be able to take out every ounce of time and run at the speed of light, so 
+to speak. So we're going to continue to invest in that differentiation. We're going to continue to make us stand 
+out to be different. Our customers really value the full range of our capabilities. They like the notion of a one 
+place to go. I'm not sure others bring that. I know we do, and I know we're extracting value from the 
+marketplace for that with our customers and our deployments.\nErik Woodring: Awesome. Thank you, Jeff. I 
+appreciate it. Good luck, guys.\nJeff Clarke: You're welcome.\nOperator: And the next question will come 
+from Simon Leopold with Raymond James.\nSimon Leopold: Thank you very much for taking the question. I 
+was wondering if you could give us your thoughts on your exposure to the U.S. federal government. Basically, 
+how big is it typically as a percent of your revenue? And how are you thinking about the trend given all the 
+noise we hear out of Washington around budget cuts and spending cuts?\nYvonne McGill: So Simon, I'll take 
+a pass at that. We do business in 170-plus countries around the world. Obviously, our largest country is the 
+United States, and we do business with the federal government. But I can't really parse out exactly what 
+you're asking for. We're certainly going to lean into all opportunities that are ahead of us and continue to be 
+successful in that space. I don't know...\nJeff Clarke: No, I would add to what Yvonne said. We've had 
+numerous times in our history where a country or a particular segment demand was suppressed for various 
+reasons. We've been able to navigate the cycles, I think, pretty successfully. Our underlying belief is United 
+States government will need technology. AI plays a pretty significant role in our nation. And I think the 
+demand will materialize. We'll get through whatever is happening today. And we have a broad business to be 
+able to do that. Whether it's PC, servers, storage, AI solutions, our services making it up in other parts of the 
+world, other parts of the United States, we've again proven we've done that consistently, and we'll do so 
+here.\nYvonne McGill: We can help drive efficiencies in every environment. So excited about the opportunity 
+ahead.\nSimon Leopold: Thanks, Yvonne.\nOperator: And our next question will come from Aaron Rakers 
+with Wells Fargo.\nAaron Rakers: Yes, thanks for taking the question. Just building on Erik's fire question, I'm 
+curious, Jeff, as we really start to see the materialization of the Blackwell product cycle through your AI 
+backlog, I'm curious, when you're engaged in like rack scale configurations, how would you compare the 
+margin profile of those relative to the AI business on, let's say, the Hopper product cycle? And can you talk a 
+little bit about the levers that you see to improve that margin as we move through 2025? Thank you.\nJeff 
+Clarke: Sure, Aaron. I think I mentioned in the last call that the Blackwell margins were lower than the Hopper 
+margins and remains so today. We're still early. The deals are very large upfront. There's more competitors, 
+so it's a more competitive landscape. And I'll probably sound a little redundant with the last answer with Erik. 
+Look, this is a system design and architecture work. There's an ability to really distinguish our engineering 
+and value add in that step, which is an opportunity for us to extract value and opportunity for us to reduce 
+cost. These aren't reference designs or as we would affectionately call in the engineering community, they're 
+not cookie-cutter designs. We're designing a unique rack, a unique power distribution unit. Our cooling, our 
+manifold, the cold plate, the ability to engineer that and to drive that through the scale of our supply chain are 
+opportunities for us, helping our customers attach with our networking with our storage or opportunities. And 
+while still small, it remains an opportunity because every large cluster, and for that matter, every AI workload 
+requires data to fulfill its need. Services, installation, deployment, those are value-add opportunities for us 
+that we continue to build on, and then obviously, the ability to be a time-to-market advantage. Those are 
+areas that we continue to focus on. They drive differentiation. I think Yvonne and I have been consistent for 
+the better part of the year that AI servers are margin rate-dilutive. They are margin dollar-accretive. They are 
+operating margin-positive. They are profitable. And what's really interesting for us, if we take the work that 
+we're doing in these large clusters, it really scales nicely to the enterprise. It allows us to really take the 
+efficiencies and learnings from what we're doing with the largest clusters in the world and build optimized 
+solutions for very specific domain-specific AI use cases. And our experience to date is the AI margins in 
+enterprise are better, and I think they'll continue to be, and that's what we're focusing on.\nAaron Rakers: 
+Okay, thanks, Eric.\nOperator: And our next question will come from Michael Ng with Goldman 
+Sachs.\nMichael Ng: Hi good afternoon. Thank you for the question. I just have one on the ISG margin outlook 
+of flat year-over-year for the upcoming year. It's a great outlook, particularly considering AI server revenues 
+growing 50%. So can you talk a little bit about the expectations for margins for some of the components, 
+traditional servers, storage AI servers? I'm just trying to understand the ability to keep ISG margins flat 
+despite presumably the dilutive effect from the AI server margins. Thank you.\nJeff Clarke: I think, Mike, 
+maybe the way to look at this is the, first and foremost, as we think about holding ISG margins flat, I love the 
+way that you asked the question, we're going to do that by growing at least $15 billion in AI servers. I know 
+your question is how we're going to do that. But for us, that's a very important mark that we're going to be able 
+to meet that operating range that we've committed in our long-term framework and we're going to grow at a 
+minimum of $15 billion in AI servers. And we're going to do that by what we've done in traditional servers and 
+what we've done in storage. The storage leverage that Yvonne talked about earlier is front and center. When 
+we grow the storage business and we control our expenses, scale matters, the operating margins improve. 
+When we pivot to Dell IP storage, which we have done, our margins improve. The margins of our own IP are 
+vastly superior than third-party IP. We've been doing that for some time. We made mention, I think, in our 
+remarks about PowerStore. It's grown four consecutive quarters on the van line, the last three, double-digit; 
+in the largest space in the external storage marketplace, midrange. It has differentiated features. We're going 
+to continue to leverage our IP storage. We're building out the customer base with our direct sales force and 
+our partner-first channel program. We're continuing to invest in the innovation and differentiation in our 
+storage. And with our coverage, the broadest coverage in our industry, and the deepest specialty capability, 
+we're going to continue to grow the customer base, which I might add, the PowerFlex customer base grew, 
+the PowerScale customer base grew, the PowerStore customer base grew. And then lastly, we're looking to 
+attach more storage to every AI opportunity that we have. Our traditional storage business continues to grow, 
+5 consecutive quarters of year-over-year growth. We've seen an expansion of ERUs as we see the 
+consolidation continuing to occur in the data center to free up more floor space and become more power 
+efficiency. We see our 16G and 17G products ramping nicely. And those are driving, again, more cores, more 
+memory, more SSDs, more margin dollars per server that we put in the marketplace. That's how we're doing 
+it. If I missed anything, Yvonne...\nYvonne McGill: Thank you. I think you hit it.\nOperator: And the next 
+question will come from Ben Reitzes with Melius Research.\nBen Reitzes: Hey, thanks guys. Appreciate it. 
+Could you be more specific on the guidance for this year with regard to tariffs? What are you factoring in for 
+China in particular? Is it the 10% or today, this morning's 20%? And then are you instituting any remedies? 
+And what are your thoughts about remedies like raising prices, moving stuff around? And how are you 
+adjusting for that? Thanks a lot.\nJeff Clarke: Well, Ben, maybe I'll take a swing at it, and Yvonne can clean up 
+on this one here. Whatever was announced this morning, which we know things were announced this 
+morning is not on what we just said. That said, this is a pretty darn dynamic environment as represented what 
+we heard this morning. It's fluid. We built an industry-leading supply chain that's globally diverse, agile, 
+resilient that helps us minimize the impacts of these trade regulations, tariffs to our customers and 
+shareholders. We've been monitoring this for some time. We've taken our digital supply chain, our digital 
+twins actually using some AI modelling to look at every possible scenario that you might imagine of this 
+country, that country restrictions here, awaits here. To help us understand how we optimize our network and 
+how we that in the least amount of time at the speed of Dell. And whatever tariff we cannot mitigate, we view 
+that as an input cost. And as our input costs go up, it may require us to adjust prices. That's what we've done 
+in the past. I can't imagine we're going to do anything differently. Yvonne, if I missed something.\nYvonne 
+McGill: No, I think you hit it. We'll take into account the input costs and price accordingly in this competitive 
+environment that we're operating in such, continue onwards.\nOperator: And we'll take a question from 
+David Vogt with UBS.\nDavid Vogt: Great, thanks guys. Maybe just on ISG xAI. So if we take -- maybe Yvonne 
+for you, if we take your kind of outlook at face value, it points to incredibly strong growth in traditional server 
+and storage. I know you just posted relatively good numbers. But what are you seeing in the marketplace vis-
+…-vis your traction versus your competitors? And kind of how do we think about getting to high single-digit 
+growth in that part of the business given sort of the macro environment that we just talked about? 
+Thanks.\nYvonne McGill: So David, we are expecting to have growth across the full portfolio in ISG. We -- as I 
+talked about, we're expecting to have storage growing in the low single digits, server higher than that and then 
+the $15 billion at least in AI servers. So I guess we'll continue -- there's lots of opportunities out there where 
+there continues to be multiples of what we've already seen. The pipeline continues to grow. I don't know, Jeff, 
+what you'd add to that around ISG. I feel confident and comfortable in the guide we've laid out for the full year 
+and the opportunity that it has.\nJeff Clarke: Yes. Maybe a little bit of color. Let's take storage as an example. 
+You're seeing a pivot to our Dell IP storage. Modern workloads demand an architecture that can be flexible, 
+sufficient, optimizes performance. And we think a disaggregated architecture is the right answer with the 
+modern workloads. That presents a headwind of our large position that we have in HCI, which will become 
+smaller. But we're going to overcome that by taking share in our Dell IP storage portfolio across the board in 
+the midrange. Our software to find project like -- or product like PowerFlex and then PowerScale in the 
+infrastructure space. So I mean, I think that gives you a sense of a headwind that may exist there that on the 
+surface may not be obvious, but it's certainly something that we're challenged as we pivot towards our 
+storage, which is more profitable.\nYvonne McGill: I was going to say it's more profitable to do our own.\nJeff 
+Clarke: There's revenue that we'll see go away at a lower margin rate, the HCI business. We have a secular 
+decline in the high-end space where we're the market leader with our PowerMax product. So we're going to 
+overcome those and drive the growth that Yvonne mentioned. And then traditional servers, I don't know if 
+you've seen some of the recent market forecast. It's low single-digit growth. We're going to take share. We've 
+now had five consecutive quarters of year-over-year growth that's coming off 8 quarters of a consolidation 
+period or - of a consumption period, I should say. And we think this consolidation continues. But the 
+consolidation drives fewer units. Those units are actually higher in TRU because of the more cores, memory 
+and SSDs I mentioned earlier. And we continue to see that driving our traditional server business. I hope that 
+context helped a little bit.\nDavid Vogt : Great. Thanks, Jeff. Thanks a lot.\nJeff Clarke: Thanks, 
+David.\nOperator: And moving on to Amit Daryanani with Evercore.\nAmit Daryanani: Thanks a lot. I guess I 
+have a question on free cash flow. In fiscal '25, it looks like your free cash flow is down a couple of billion 
+dollars versus '24. Can you just talk about what's driving this contraction in free cash flow? And maybe, 
+Yvonne, you can help us kind of understand how do we think about free cash flow expectations as we head 
+into fiscal '26? What are sort of puts and takes around it? It would be really helpful to kind of get the context, 
+at least for fiscal '26, what's going on? And then, Jeff, if I could just have you talk a little bit more about -- well, 
+I think it's really impressive that your folks are showing operating leverage in fiscal '26 despite the mix being 
+negative. I think the fear everyone seems to have is, is this really durable or is it really driven by one-off 
+headcount reduction or something else. So just maybe you can touch on the durability of that would be great 
+as well?\nJeff Clarke: You go to, Tyler, then I'll come in on the durability of which structural changes we are 
+making up in.\nTyler Johnson: Amit, look, I think -- as I was sitting here last year, I definitely thought cash flow 
+was going to be a little bit stronger. If you look at what played out, one, we didn't see the growth in CSG that 
+we were expecting. And as you know that throw off really good cash. And then two, we invested a lot in our AI 
+business through inventory. And so you can see that our inventory has gone up, and that had a big impact to 
+CCC. Now if I look where I am today and I think about FY '26, I would say I've got a few things working in my 
+favor. So one, we're at a CCC level where historically, we've always shown improvement from here. And that 
+will throw off good cash. We expect good CSG this year, and that will throw off good cash. And if I think about 
+the growth in the P&L, that will throw off good cash. So look, I think we feel pretty good about cash. I do 
+expect it to be greater than 1x and so yes.\nJeff Clarke: And then to your second question, I probably won't 
+give you as much detail as you like because we think some of the changes we're making are very proprietary 
+and differentiating us in the market, the fact that we can grow while reducing our operating expenditures, but 
+Yvonne hit on it, Amit: simplify, standardize, automate. We are building a new company. We are what we call 
+modernizing it. We've made reference to modernization. If you prefer, we're future-proofing the company and 
+we're systematically going throughout all of the value streams in the company. And we are modernizing the 
+work, the workflows, taking steps out of processes, taking out manual touches, simplifying and standardizing 
+those processes, applying automation in the very technologies that we've talked about that get us excited in 
+this marketplace, which is why we believe this AI thing makes its way to enterprise, we are deploying AI in the 
+enterprise. The broad categories of use cases are industry-known, whether that's content creation and 
+management, support assistance, natural language search, design and data creation, cogeneration or 
+document automation. Those are broad enterprise use cases. We are deploying those types of technologies 
+inside our company and seeing tremendous efficiency from that and it is durable. It's not a one- 
+timer.\nYvonne McGill: What's so exciting as we're making all these changes, we're making investments. But 
+we're driving all this efficiency to enable that. So the net, what you're seeing us guide to is a lower spend, but 
+it's because we're driving all of these efficiencies will enable us to invest OP spending.\nJeff Clarke: Well, I 
+think that's very important. I think I mentioned it in the remarks comment that we are reducing the cost. And 
+we've built, if you will, the ability to invest more in our innovation engines, more in our areas where we drive 
+distinct advantages. Our sales force, we've invested in our sales force over the past year, we've invested in 
+services, we've invested in the supply chain while reducing our cost.\nYvonne McGill: And it's just the 
+beginning. Thanks Amit.\nOperator: And the next question will come from Matt Niknam with Deutsche Bank. 
+Please go ahead.\nMatt Niknam: Hi, thanks so much for taking my question. My question is on CSG. I can ask 
+about a different segment. The guidance implies an acceleration over the course of the year. And I'm just 
+wondering what sort of visibility or confidence level you have there that this long-awaited PC refresh will 
+finally materialize. And I ask that in context of a relative slowdown that was referenced in January?\nJeff 
+Clarke: Yes. Matt, maybe this will shed some optimism on why we believe that this refresh that we've talked 
+about is in the making. I mean, clearly, we've talked about there's 1.5 billion or so PCs in the installed base. 
+We'll say half of them are 4 years or older. It's got to flip 360 million PCs turned 4 years old that were bought 
+in 2021 this year. Those are normally flags for opportunity for refresh, but probably the more compelling 
+reasons, and I think there are two. We're 9 months away from the Windows 10 end of life. There's over 500 
+million PCs running today that can't -- running Windows 10 that can't run Windows 11. There's more than 200 
+million PCs today running Windows 10 that can run Windows 11. Those are prime targets for upgrades. It's 
+just a large pool of old machines running an older version of the operating system that could be upgraded. If 
+you were to reflect on where we were with the Windows 7 end of life compared to where we are today, let's 
+just say we have a long way to go in the next 9 months to catch up and be ready for the end of life. We made 
+reference that SMB for us had strength. That's always an indicator that things are beginning to move. One of 
+the countries that really show a traditional or historical perspective that the refresh is underway is Japan. If 
+you look at the dynamics in the Japan marketplace, it is clearly moving through refresh as it will get done 
+towards the end of October. And then probably the last thing and the most exciting thing and what is actually 
+driving some of the - I think, reticence to refresh right now is AI PCs. And the number of new AI PCs that are 
+coming out in the first half of the year, we clearly just launched a bunch of Lunar Lake-based notebooks in 
+January. Suffice to say, there's more coming. We've announced AMD AI PCs. Customers are going to want to 
+look under the hood at each of those and then make a decision that will future-proof their decision of what is 
+the right correct AI PC for them because they'll have the asset for at least 4 years. All of that makes us feel 
+more confident that the refresh is coming, albeit delayed, slower than any that I've encountered in my career. 
+But all of the data suggests it's there, it's coming, it's coming at a good rate and probably extends. Does that 
+help?\nMatt Niknam: It did. Thanks.\nJeff Clarke: Thanks, Matt.\nMatt Niknam: You are welcome.\nOperator: 
+And the next question will come from Ananda Baruah with Loop Capital.\nAnanda Baruah: Yes, good 
+afternoon guys. Thanks for taking the question. Really appreciate it. One for me, maybe two parts, but 
+related. Could you talk to, Jeff, how you guys are thinking about the server refresh durability? I believe after 
+last call, you talked about part of the current catalyst is folks sort of refreshing older PCs for space and power 
+savings in some to prepare for GenAI. And this is ahead of processor refreshes, so I guess sort of the context 
+of durability of the traditional server growth you see going on now. And then just the sort of add-on to that is 
+you had mentioned focusing -- or targeting to increase attach -- store attach to your GenAI servers. Would 
+just love what you're thinking about there. And what are the mechanics of getting that taken care of over 
+time? That's it for me. Thanks, guys.\nJeff Clarke: Sure. Let me try the server one again. As I mentioned, we're 
+5 quarters now of year-over-year growth that's coming off an 8-quarter digestion period. In our guide and 
+what we're trying to articulate is that continues for another 4 quarters. So 5 quarters becomes 9 quarters of 
+growth, tempering a little bit. Still driven by the same dynamics that you so well said is freeing up floor space 
+and driving energy efficiency and cooling efficiency. The consolidation occurs, as you look at the installed 
+base, and we have -- just Dell has a very large installed base of 13G and 14G servers all ripe to be replaced 
+with the new 16G server and -- or 17G server. Those conversion rates are roughly a 3 to 4 of the old servers 
+can be, if you will, replaced by a single 16G server, and 6 to 7 of the old servers can be replaced by a single 7G 
+server. Why? Because they have more cores, they're more memory, more storage, they're more energy-
+efficient. And again, that continues, we believe, throughout the fiscal '26, calendar '25. We've seen no signs 
+that is going to go away from us in that period of time. If you flip over to your other question, again, the 
+fundamental premises, AI needs data. It devours data. You got to feed the beast. The feeding of that beast, if 
+you will, has to be closer to where the computational capability is. So hot and warm storage, the notion of 
+parallel file systems, unstructured file systems, data management tools that help find data and help data be 
+ingested are the opportunities. We have the leading platform for unstructured data. We continue to make it 
+better with the F910 and F710 that I mentioned earlier. Nearly a year ago, we talked about a parallel file 
+system that we are building, Project Lightning, we referred to it. So we're coming to the marketplace with a AI-
+driven parallel file system. And our Dell data lake house allows us to help customers prepare their 
+information, manage their information and just their information. Our sales force is incented to attach 
+storage with AI opportunities. They will continue to be incented and we inspect that, and we continue to see 
+progress in that area.\nAnanda Baruah: Okay, thanks.\nOperator: And our next question will come from 
+Samik Chatterjee with JPMorgan. Again, Samik Chatterjee, your line is open. Please go ahead with your 
+questions. Perhaps you place this on mute.\nSamik Chatterjee: Hi, hopefully you can hear me now. Jeff, I just 
+wanted to go back to some of your prepared remarks and -- about the $15 billion of AI server revenue that you 
+were highlighting that you at least expect to grow to that level. Just wondering, how much of that is gated by 
+supply, particularly versus the visibility into supply that you're getting? And how much of that commentary 
+around sort of at least growing there is a supply dynamic versus a demand dynamic? And should we be 
+expecting more sort of linear growth for the quarter as we think about the -- with visibility on supply? Thank 
+you.\nJeff Clarke: Well, I think clearly, Hopper supply is available today. I believe there is references 
+yesterday that Blackwell is in production and ramping. We're open for business and taking orders. The 
+message that I really wanted to drive in our remarks is on day 27 of the fiscal year, we're trying to 
+communicate that we are at least $15 billion in AI shipments. Our 5-quarter pipeline continues to grow. It's 
+several multiples of our backlog. We are going to pursue every opportunity with the CSPs and in enterprise. 
+These large-scale systems are accelerating and getting bigger. Models are quickly moving to reasoning 
+models, which consume and require more computational capability, i.e., more computers. And the use 
+cases continue to get clearer for enterprise to drive the return on investments they want to see to actually 
+use AI more broadly. Algorithm innovation continues to accelerate. Again, these reasoning models are -- will 
+consume more computational capability. They're moving to be multimodal, which even consumes more kind 
+of like where this is going. We're optimistic. I don't see supply as an issue. Clearly, these are about building 
+the right architecture. There's a customer preparation or customer readiness component of this, new data 
+centers getting powered, getting water, getting cooling. There's other materials beyond the GPU, getting the 
+rack, getting the cold plates, getting the CDUs, the PDUs, all of that is what we orchestrate. We have line of 
+sight that is at least $15 billion. We'll continue to update as that might change. And we're all in. I don't know 
+what else I can tell you. I hope that helped.\nPaul Frantz: Thanks a lot, Samik. Justin, we'll take one more 
+question, please, and then we'll hand it over to Jeff for a close.\nOperator: Our final question will come from 
+Asiya Merchant with Citigroup.\nAsiya Merchant: Great, thank you for squeezing me in here. Jeff, if I can just 
+ask about your pipeline and the backlog itself, I mean to the extent that you see enterprises and sovereigns in 
+that makes -- how has that changed, say, relative to a quarter ago and how you see that progressing as you 
+ramp up or as you flush through your pipeline and your backlog? Thank you.\nJeff Clarke: Well, it's maybe 
+slightly repetitive to the previous question. The 5-quarter pipeline grew quarter-over-quarter and has grown 
+every quarter since the 9680 was launched. The CSP component grew, the enterprise component grew, the 
+enterprise customer base grew, sectors like education, technology, manufacturing and government grew. 
+Our buyer base in AI continues to grow, what we shipped in Q4. The revenue in Q4 was up. The number of 
+new buyers was up. We're well over several -- a couple of thousand of unique customers. So it has a healthy 
+mix of enterprise. It clearly has a healthy mix of CSPs. It continues to grow to this notion of several multiples. 
+It's with the technologies that are out and available today, and we're excited to see that. And quite honestly, I 
+can't remember the second half of your question. So if you'll refresh my memory, I will answer it.\nAsiya 
+Merchant: No, that's good. And then just to the extent that you see your attach with those enterprises, how 
+much of that is really factored into your fiscal '26 guide?\nJeff Clarke: To the best of our ability, we factor in 
+the attach of services, our professional services, our deployment services, our installation services, the 
+ability to sell networking and network installation, the ability to sell storage. It's an all-inclusive number when 
+we look at that at least $15 billion of AI servers in the marketplace -- shipped in the marketplace.\nPaul 
+Frantz: Asiya, thank you, and handing it over to Jeff for our close.\nJeff Clarke: Sure. Thanks, everybody. I 
+hope you can tell FY '25 was a strong year. We delivered 8% revenue and 10% EPS growth with $3.9 billion in 
+capital returned to shareholders. Our AI business grew to $10 billion while also improving ISG margins year-
+over-year. In FY '26, we expect to grow revenue and EPS in excess of our long-term value framework. We 
+expect our AI business will grow to at least $15 billion given our robust opportunity pipeline, our engineering, 
+our services and financing advantages. This AI business drives incremental operating profit and is EPS-
+accretive. We'll continue to modernize the company, reducing operating expenses as we grow, driving further 
+leverage in the P&L. We remain committed to our capital allocation framework, where we've announced an 
+18% increase in our annual dividend, and our share repurchase authorization increased by $10 billion. We're 
+excited for the year ahead. Thanks for your time today.\nOperator: Thank you. This concludes today's 
+conference call. We appreciate your participation. You may disconnect at this time."
+
+
+"NVIDIA Corporation provides graphics, and compute and networking solutions in the United States, Taiwan, 
+China, and internationally. The company's Graphics segment offers GeForce GPUs for gaming and PCs, the 
+GeForce NOW game streaming service and related infrastructure, and solutions for gaming platforms; 
+Quadro/NVIDIA RTX GPUs for enterprise workstation graphics; vGPU software for cloud-based visual and 
+virtual computing; automotive platforms for infotainment systems; and Omniverse software for building 3D 
+designs and virtual worlds. Its Compute & Networking segment provides Data Center platforms and systems 
+for AI, HPC, and accelerated computing; Mellanox networking and interconnect solutions; automotive AI 
+Cockpit, autonomous driving development agreements, and autonomous vehicle solutions; cryptocurrency 
+mining processors; Jetson for robotics and other embedded platforms; and NVIDIA AI Enterprise and other 
+software. The company's products are used in gaming, professional visualization, datacenter, and 
+automotive markets. NVIDIA Corporation sells its products to original equipment manufacturers, original 
+device manufacturers, system builders, add-in board manufacturers, retailers/distributors, independent 
+software vendors, Internet and cloud service providers, automotive manufacturers and tier-1 automotive 
+suppliers, mapping companies, start-ups, and other ecosystem participants. It has a strategic collaboration 
+with Kroger Co. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, 
+California."
+
+"Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and 
+accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal 
+computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, 
+Apple TV, Apple Watch, Beats products, and HomePod. It also provides AppleCare support and cloud 
+services; and operates various platforms, including the App Store that allow customers to discover and 
+download applications and digital content, such as books, music, video, games, and podcasts, as well as 
+advertising services include third-party licensing arrangements and its own advertising platforms. In addition, 
+the company offers various subscription-based services, such as Apple Arcade, a game subscription service; 
+Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening 
+experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple 
+TV+, which offers exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless 
+payment service, as well as licenses its intellectual property. The company serves consumers, and small and 
+mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party 
+applications for its products through the App Store. The company also sells its products through its retail and 
+online stores, and direct sales force; and third-party cellular network carriers, wholesalers, retailers, and 
+resellers. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California."
+
+
+"Suhasini Chandramouli: Good afternoon, and welcome to the Apple Q1 Fiscal Year 2025 Earnings 
+Conference Call. My name is Suhasini Chandramouli, Director of Investor Relations. Today's call is being 
+recorded. Speaking first today are Apple CEO, Tim Cook, and he will be followed by CFO, Kevan Parekh. After 
+that, we'll open the call to questions from analysts. Please note that some of the information you'll hear 
+during our discussion today will consist of forward-looking statements, including, without limitation, those 
+regarding revenue, gross margin, operating expenses, other income and expense, taxes, capital allocation, 
+and future business outlook, including the potential impact of macroeconomic conditions on the company's 
+business and results of operations. These statements involve risks and uncertainties that may cause actual 
+results or trends to differ materially from our forecast. For more information, please refer to the risk factors 
+discussed in Apple's most recently filed annual report on Form 10-K and the Form 8-K filed with the SEC 
+today along with the associated press release. Apple assumes no obligation to update any forward-looking 
+statements, which speak only as of the date they are made. I'd now like to turn the call over to Tim for 
+introductory remarks.\nTim Cook: Thank you, Suhasini. Good afternoon, everyone, and thanks for joining the 
+call. Before I talk about our results I'd like to take a moment to acknowledge the devastating wildfires that 
+impacted the Los Angeles area this month. From our retail teams to Apple TV+, Apple Music, Fitness Plus, 
+Beats and more LA is home to many of our team members. Our thoughts are with everyone who is beginning 
+the road to recovery. For our part, we are contributing to the relief efforts and we will continue to support our 
+teams and the local community. Now turning to the quarter. Today, Apple is reporting revenue of $124.3 
+billion for the December quarter, up 4% from a year ago, and an all-time record. EPS also set an all-time 
+record of $2.40, 10% higher year-over-year. We achieved all-time revenue records across the majority of the 
+countries and regions we track, including the Americas, Europe, Japan, and the rest of Asia Pacific. We also 
+continue to see momentum in emerging markets, setting all-time revenue records in a number of markets, 
+including Latin America, the Middle East, and South Asia, among others. In services, we achieved an all-time 
+revenue record, and in the past year, we've seen nearly $100 billion in revenue from our services business. 
+I'm also pleased to announce that we reached a new record for our installed base with over 2.35 billion active 
+devices. In October, we released the first set of Apple Intelligence features in U.S. English for iPhone, iPad, 
+and Mac, and we rolled out more features and expanded to more countries in December. Now users can 
+discover the benefits of these new features in the things they do every day. They can use writing tools to help 
+find just the right words, create fun and unique images with Image Playground and Genmoji, handle daily 
+tasks and seek out information with a more natural and conversational Siri, create movies of their memories 
+with a simple prompt, and touch up their photos with clean up. We introduced visual intelligence with 
+camera control to help users instantly learn about their surroundings. Users can also seamlessly access 
+chat GPT across iOS, iPadOS and MacOS. And we were excited to recently begin our international expansion 
+with Apple Intelligence now available in Australia, Canada, New Zealand, South Africa, and the U.K. We're 
+working hard to take Apple Intelligence even further. In April, we're bringing Apple Intelligence to more 
+languages, including French, German, Italian, Portuguese, Spanish, Japanese, Korean, and simplified 
+Chinese, as well as localized English to Singapore and India. And we'll continue to roll out more features in 
+the future, including an even more capable Siri. Apple Intelligence builds on years of innovations we've made 
+across hardware and software to transform how users experience our products. Apple Intelligence also 
+empowers users by delivering personal context that's relevant to them. And importantly, Apple Intelligence is 
+a breakthrough for privacy and AI with innovations like Private Cloud Compute, which extends the industry-
+leading security and privacy of Apple devices into the cloud. Apple Intelligence opens up an exciting new 
+frontier and is already elevating experiences across iPhone, iPad, and Mac. We're going to keep investing in 
+innovation and in transformative tools that help users in their everyday lives. Let me now turn to our results 
+for the quarter, starting with iPhone. iPhone revenue came in at $69.1 billion, reaching all-time iPhone 
+revenue records in dozens of markets and regions. Our iPhone 16 lineup takes the smartphone experience to 
+the next level in so many ways, and Apple Intelligence is one of many reasons why customers are excited. 
+With the A18 powered iPhone 16 and iPhone 16 Plus, users are getting a big boost in battery life and 
+incredible camera experiences with camera control. Our amazingly powerful iPhone 16 Pro models go even 
+further with larger-than-ever displays and a pro camera system so advanced it can turn moments into 
+masterpieces. In Mac, revenue was $9 billion for the December quarter, 16% higher year-over-year, driven by 
+significant excitement around the world for our latest Mac lineup. The Mac is more than just a powerful tool. 
+It's a launchpad to enable users to bring their best ideas and boldest creations to life. And there are so many 
+reasons to choose Mac, from the breathtaking performance of the M4 family of chips to the groundbreaking 
+and growing capabilities of Apple Intelligence. Every product in the Mac lineup offers something 
+extraordinary, whether that's the super portable MacBook Air, the powerhouse MacBook Pro, the world's best 
+all-in-one iMac, or the small wonder that is the Mac Mini, which is not only stunningly capable, but is our first 
+carbon neutral Mac. All of this is enabled by the unparalleled power of Apple Silicon. iPad revenue was $8.1 
+billion, up 15% from a year ago, driven by strong interest for our latest products. We love hearing from 
+customers, who are discovering for the first time the versatility of iPad from the ultra-portal iPad Mini, built 
+from the ground up for Apple intelligence, to the powerful M4 iPad Pro in a stunningly thin and light design. 
+iPad is there for our users whenever they need it and wherever they go and we are pleased to see so much 
+excitement and enthusiasm for our lineup. Wearables home and accessories revenue came in at $11.7 
+billion. With its most advanced display yet and a thinner more comfortable design, the all-new Apple Watch 
+Series 10 is the perfect companion to help users pursue their health and fitness goals this year. From the 
+powerful Vitals app to more customizable activity rings, users have an ever-increasing set of innovative 
+health tools at their fingertips and watchOS 11. Health innovation has long been a focus for us, and we're 
+committed to continuing to advance this work, because we know how much it matters to our users. We've 
+introduced new hearing health features on AirPods Pro 2, and new sleep apnea notifications on Apple Watch 
+are also helping users learn of a potentially serious condition that's thought to affect up to a billion people 
+worldwide. During the quarter, we also brought Apple Vision Pro to even more countries, enabling more 
+customers to discover the magic of spatial computing. Users are enjoying incredible immersive 
+entertainment experiences and powerful new features and enhancements to Mac virtual display. Vision Pro 
+is also supercharging the creative process and the incredibly talented director John M. Chu recently shared 
+how its extraordinary capabilities helped him bring the movie Wicked to life. Turning to services, we set an all-
+time revenue record of $26.3 billion for the December quarter, growing 14% from a year ago. We set all-time 
+records in the Americas, Europe, and rest of Asia-Pacific, and a December quarter record in Japan. Five years 
+since launch, Apple TV+ continues to be home to incredible storytelling that viewers love. There's nothing 
+quite like the anticipation that comes when a fan favorite returns, and we were thrilled to debut the second 
+season of Severance earlier this month. We have so much in store for our subscribers this year with new 
+shows like The Studio and Your Friends and Neighbors. And we can't wait for the premiere of Formula 1 
+starring Brad Pitt on June 27, which will take viewers inside the sport in a truly unprecedented way. We're 
+excited that Apple TV+ continues to draw attention and accolades. To-date, Apple TV+ productions have 
+earned more than 2,500 nominations and 538 wins. During the quarter, we were also excited to launch a new 
+Find My Service that can help our users when they lose their luggage. For the first time, if you put an air tag in 
+your suitcase, you'll be able to share its location information with many major airlines, so they can quickly 
+track down your bags if they get lost. Turning to retail, our teams went above and beyond to help customers 
+find the perfect gift throughout the holiday season. We also celebrated openings of new stores in China, 
+Spain, and the U.S. and we were excited to announce plans to connect with even more customers this year 
+by adding a fifth store in the UAE and bringing our online store to Saudi Arabia this summer. We can't wait to 
+welcome customers to the first of several flagship store locations in Saudi Arabia that were opening 
+beginning in 2026. I just had the chance to visit both countries last month, and I had a great time meeting with 
+customers and team members. There's an incredible energy and passion for technology in these growing 
+markets. Every day, I get deeply moving notes about the many ways our technology is enriching our users' 
+lives. I recently got a note from a customer who put his watch on his father's wrist when he feared something 
+was wrong with him. The watch alerted them that the father was an AFib and they were able to get him to the 
+hospital for potentially life-saving treatment. Another user put his new watch on for the first time and within 
+15 minutes was notified of a low heart rate that led to a necessary pacemaker. And there are so many 
+touching notes around the profound impact of our new hearing health feature like a recent user who told me 
+it had changed her life, allowing her to take part in conversations with her children and grandchildren. These 
+are the kind of stories that remind us of how profoundly important our work is, and it drives us to innovate 
+each and every day. At Apple, the future is full of promise and potential. We're always searching across a 
+world of possibilities, finding those places where we can do the most good and putting all of our energy and 
+ingenuity into making something special. With that, I'll turn it over to Kevin.\nKevan Parekh: Thanks Tim, and 
+good afternoon everyone. I'm going to cover the results for the first quarter of our fiscal year. We are very 
+pleased to report an all-time high for revenue with December quarter revenue of $124.3 billion, up 4% year-
+over-year. We achieved all-time revenue records in the Americas, Europe, Japan, and rest of Asia Pacific and 
+grew in the vast majority of markets we track. Products revenue was $98 billion, up 2% year-over-year, driven 
+by growth from iPad and Mac. Thanks to our incredible customer satisfaction and strong loyalty, our installed 
+base of active devices reached an all-time high across all products and geographic segments and is now over 
+2.35 billion active devices. Services revenue reached an all-time record of $26.3 billion, up 14% year-over-
+year. We grew in every geographic segment and achieved all-time records in both developed and emerging 
+markets. Company gross margin was 46.9% at the high-end of our guidance range and up 70 basis points 
+sequentially, primarily driven by favorable mix. Products gross margin was 39.3%, up 300 basis points 
+sequentially, primarily driven by favorable mix and leverage. Services gross margin was 75%, up 100 basis 
+points sequentially, primarily driven by mix. Operating expenses of $15.4 billion landed at the midpoint of our 
+guidance range and up 7% year-over-year. This strong business performance resulted in all-time records for 
+both net income at $36.3 billion and diluted earnings per share of $2.40, up 10% year-over-year. Operating 
+cash flow was also strong at $29.9 billion, which included the impact of the $11.9 billion we paid during the 
+quarter in connection with the state aid decision. Now, I'm going to provide some more details for each of our 
+revenue categories. iPhone revenue was $69.1 billion, roughly flat to the prior year. We grew in the majority of 
+markets we track and reached all-time revenue records in several developed markets, including Canada, 
+Western Europe, and Japan and in emerging markets like Latin America, the Middle East, and South Asia. The 
+iPhone Active installed base grew to an all-time high in total in an average geographic segment. We also set 
+an all-time record for upgraders. According to a recent survey from Kantar during the December quarter, 
+iPhone was a top-selling model in the U.S., Urban China, India, the U.K., France, Australia, and Japan. We 
+continue to see high levels of customer satisfaction in the U.S. at 96% as measured by 451 research. Mac 
+generated $9 billion in revenue, up 16% year-over-year. We saw strength across our lineup from the new Mac 
+Mini to the latest MacBook Air and MacBook Pro models. This incredible performance was broad-based with 
+double-digit growth in every geographic segment. With our latest advances in Apple Silicon and our fastest 
+neural engine ever, customers are able to take advantage of the full capabilities of AI and Mac. The Mac 
+installed base reached an all-time high and we saw a double-digit growth for both upgraders and customers 
+new to the Mac. Additionally, customer satisfaction in the U.S. was recently measured at 94%. iPad revenue 
+was $8.1 billion, up 15% year-over-year, driven by the new iPad Mini and latest iPad Air. The iPad installed 
+base reached another all-time high, and over half of the customers who purchased an iPad during the quarter 
+were new to the product. Customer satisfaction was at 96% in the U.S. based on the latest reports from 451 
+Research. Wearable's home and accessories revenue was $11.7 billion, down 2% year-over-year. Customers 
+are excited about the new AirPods 4 and the latest hearing health features in AirPods Pro 2. On watch, 
+although we face a difficult compare against the watch Ultra 2 launch last year, the Apple Watch installed 
+base reached a new all-time high, with over half of customers purchasing an Apple Watch during the quarter 
+being new to the product. Customer satisfaction for watch in the U.S. was reported at 94%. Our services 
+revenue reached an all-time high of $26.3 billion, up 14% year-over-year. Services continues to see strong 
+momentum, and the growth of our installed base of active devices gives us great opportunities for the future. 
+We also see increased customer engagement with our services offerings. Both transacting and paid 
+accounts reached new all-time highs, with paid accounts growing double-digits year-over-year. Paid 
+subscriptions also grew double-digits. We have well over 1 billion paid subscriptions across the services on 
+our platform. We remain focused on improving the breadth and quality of our services offerings, from new 
+games on Apple Arcade to exciting new programming on Fitness Plus, and the continued expansion of 
+features like Tap to Pay, now live in 20 markets. Turning to enterprise, we have seen businesses continue to 
+expand their deployments of our products and services. Deutsche Bank launched its Mac as Choice program 
+for the developers and also issued the latest MacBook Air as a standard computer for their entire mortgage 
+lending division. And we're excited to see leading enterprises such as SAP leverage Apple Intelligence in the 
+U.S., with features like writing tools, summarize, and priority notifications to enhance both their employee 
+and customer experiences. We also see strong demand in our emerging markets. For example, Zomato, a 
+leading food ordering and delivery company in India, has deployed 1,000 of Macs across their workforce to 
+foster innovation. In Vision Pro continues to see more use cases in enterprise, with Cisco's new spatial 
+meetings delivering a fully immersive video conferencing experience for remote collaboration and learning. 
+Let me quickly summarize our cash position and capital return program. We ended the quarter with $141 
+billion in cash and marketable securities. We repaid $1 billion in maturing debt and decreased commercial 
+paper by $8 billion, resulting in $97 billion in total debt. Therefore, net cash at the end of the quarter was $45 
+billion. During the quarter, we returned over $30 billion to shareholders. This included $3.9 billion in 
+dividends and equivalents and $23.3 billion through open market repurchases of 100 million Apple shares. 
+As usual, we will provide an update to our capital return program when we report results for the March 
+quarter. As we move ahead into the March quarter, I'd like to review our outlook which includes the types of 
+forward-looking information that Suhasini referred to at the beginning of the call. The color we're providing 
+today assumes that the macroeconomic outlook doesn't worsen from what we're projecting today for the 
+current quarter. As the dollar is strengthened significantly, we expect foreign exchange to be a headwind and 
+to have a negative impact on revenue of about 2.5 percentage points on a year-over-year basis. Despite that 
+headwind, we expect our March quarter total company revenue to grow low to mid-single-digits year-over-
+year. We expect services revenue to grow low-double-digits year-over-year. When you remove the negative 
+impact of the foreign exchange headwinds I described earlier, the year-over-year growth rate would be 
+comparable to that of the December quarter. We expect gross margin to be between 46.5% and 47.5%. We 
+expect operating expenses to be between $15.1 billion and $15.3 billion. We expect OI&E to be around 
+negative $300 million, excluding any potential impact from the mark-to-market of minority investments, and 
+our tax rate to be around 16%. Finally, today our Board of Directors has declared a cash dividend of $0.25 per 
+share of common stock payable on February 13, 2025, to shareholders of record as of February 10, 2025. 
+With that, let's open to call the questions.\nSuhasini Chandramouli: Thank you, Kevin. We ask that you limit 
+yourself to two questions. Operator, may we have the first question please?\nOperator: Certainly, we will go 
+ahead and take our first question from Erik Woodring with Morgan Stanley. Please go ahead.\nErik Woodring: 
+Great guys, Thanks so much for taking my questions. Tim, in your prepared remarks, you had noted that 
+iPhone 16 models are selling better in markets where Apple Intelligence is available? And I'm just wondering 
+if you could double-click on that comment a bit and share any other details you believe could better help us 
+understand how Apple Intelligence is really impacting iPhone demand and/or what features you find that 
+users are using most often already? And then I just have a quick follow-up. Thank you.\nTim Cook: Yes, Eric. 
+Hi, it's Tim. The -- we did see that the markets where we had rolled out Apple Intelligence, that the year-over-
+year performance on the iPhone 16 family was stronger than those where Apple Intelligence was not 
+available. In terms of the features that people are using, they're using all of the ones that I'd referenced in my 
+opening comments from writing tools to image playground and Genmoji to visual intelligence and more. And 
+so we see all of those being used. The cleanup is another one that is popular and people love seeing that one 
+demoed in the stores as well. We only had 2, 2.5 weeks or so during the December quarter of the second 
+release of [18.2] (ph) and then only had the U.K. and the other English language countries for the 2.5 weeks. 
+And so we've got just the early indications at the moment, but we were glad?\nErik Woodring: Okay, that's 
+really helpful.\nTim Cook: Yes.\nErik Woodring: Okay, thank you for that, Tim. It's helpful. And then, you 
+know, if we just touch on China, obviously, in the news fairly frequently, if we set aside China Macro, which I 
+understand is still challenging, can you maybe talk about the headwinds that that Apple faces, whether 
+that's, you know, shifting preferences for Western technology brands in favor of domestic vendors, or is this 
+just a function of not necessarily having Apple intelligence available with the iPhone 16, which is, you know, 
+not necessarily helping replacement cycles. Just maybe double clicking on, on what you think and what 
+you're hearing in China as a regard as it relates to the iPhone. Thanks so much.\nTim Cook: Yes, sure. If you 
+look at our greater China revenue for the quarter, we were down 11% year-over-year. And over half of the 
+decline that we experienced was driven by change in channel inventory from the beginning to the end of the 
+quarter. And of course on the Apple intelligence side we have not rolled out in China and as we just talked 
+about we did see better results in the markets that we had rolled out in than markets we hadn't rolled out in. 
+And of course, it's the most competitive market in the world. And so all of those things are true. In terms of 
+the macro situation, there was a fiscal stimulus or subsidy announced in very recently in January that did not 
+affect the December quarter. There were some provincial subsidies in the December quarter, but the 
+national program was announced, I believe, on January 20. And it does cover the categories that we have 
+products in from smartphones to tablets and PCs and smart watches up to a certain, a maximum price point. 
+And so we do see fiscal stimulus occurring and we'll be glad to talk about what that looks like on the next 
+call.\nErik Woodring: Great. Thanks so much, Tim. Good luck.\nTim Cook: Thank you.\nSuhasini 
+Chandramouli: Thank you, Eric. Operator, can we have the next question, please?\nOperator: Our next 
+question is from Ben Reitzes with Melius. Please go ahead.\nBen Reitzes: Hey, guys. Thanks a lot for the 
+question. And, hey, Tim, I wanted to ask you who -- you knew this one was coming, but there's a perception 
+that you're a big beneficiary of lower cost of compute and I was wondering if you could give your worldly 
+perspective here on the DeepSeek situation and if you are going to, if you, if anything's happened to change 
+your views in terms of a tailwind to margins and your ability to execute even due to the potential for cost to 
+come down due to that development and probably what was going to happen anyway. But I'd love your 
+perspective on that and then have a quick follow-up. Thanks.\nTim Cook: Sure. In general, I think innovation 
+that drives efficiency is a good thing. And that's what you see in that model. Our tight integration of silicon 
+and software, I think, will continue to serve us very well. As you know, we do things on the device, and we do 
+things in the private cloud and which mimics from a architectural point of view the -- what happens on the 
+device. And from a CapEx point of view, we've always taken a very prudent and deliberate approach to our 
+expenditure and we continue to leverage a hybrid model, which I think continues to serve us well.\nBen 
+Reitzes: Oh, great. All right. Thanks, Tim. And then, you know, just with regard to, you know, the iPhone 
+trajectory, do you feel like, I guess, what is -- you obviously don't talk about new products and stuff like that, 
+but do you feel that there's a lot of room for form factor innovation in the future? Or do you feel that the 
+current lineup kind of it shows where you're going? I guess without pulling punches wondering if you, you 
+thought you know in terms of the phone innovation if there's a lot more to come and you could see the kind of 
+current market changing a bit over the next two to three years. Thanks.\nTim Cook: I think, Ben, I think there's 
+a lot more to come and I could not feel more optimistic about our product pipeline. So I think there's a lot of 
+innovation left on the smartphone.\nBen Reitzes: Thanks a lot, Tim.\nTim Cook: Yes, thank you.\nSuhasini 
+Chandramouli: Thank you, Ben. Operator, could we have the next question, please?\nOperator: Our next 
+question is from Michael Ng with Goldman Sachs. Please go ahead.\nMichael Ng: Good afternoon. Thank you 
+for the question. I have two as well. First, it was encouraging to hear about the record for iPhone upgraders, 
+which I think is something you haven't said for about a year now. I was wondering if you could talk a little bit 
+about what you would attribute this upgrade strength to? Has Apple Intelligence played a role in helping 
+upgrades in the markets that you've launched in? Thanks.\nTim Cook: Yes, thank you for the question. If you 
+look at iPhone, we did set an all-time record for upgraders, so we've never seen a higher level of upgraders 
+before. The installed base hit a new all-time high as well. And if you look at the 16, compared to the 15 from 
+launch, which occurred, as you know, in September, so this is across now two quarters from September to 
+the end of the December fiscal quarter, the 16 outperformed the 15. And so I think you can conclude from 
+that, that there are compelling reasons to upgrade. And in the markets where we had launched Apple 
+Intelligence, they outperformed the markets that we did not. So lots?\nMichael Ng: Great, thank you, Tim. 
+That's?\nTim Cook: Yes, lots of good color there.\nMichael Ng: Great, thank you, Tim. That's very clear. And 
+then I had one about the iPad Pro and for the thinner version. I was just wondering if you could talk about that 
+thin form factor for the iPad Pro. How did it help iPad sales overall and what did your kind of marketing 
+consumer research tell you about how consumers valued that thin product form factor? Thank you.\nTim 
+Cook: It's a good question. iPad overall grew 15% for the quarter and it was more driven by iPad Air and the 
+entry level iPad than it was the top level iPad. But overall we could not be more pleased with the iPad 
+category growing 15%. It's a great achievement for the quarter. And probably what is most important is that 
+over half of the sales in the December quarter went to customers who were new to the iPad. So that tells us 
+that there's a good amount of customers there to attract.\nMichael Ng: Thank you very much, Tim.\nTim 
+Cook: Yes. Thank you.\nSuhasini Chandramouli: Thanks, Mike. Operator, could we have the next question, 
+please?\nOperator: Our next question is from Amit Daryanani from Evercore. Please go ahead.\nAmit 
+Daryanani: Good afternoon, everyone. I have two as well. Maybe to start with, you folks are seeing some very 
+robust growth trends in emerging markets right now for Apple products? Can you just add a high level, just 
+talk about the durability of growth that you see in emerging markets? And then do you think the summation of 
+these emerging markets are starting to get big enough or perhaps starting to grow fast enough that it can 
+actually offset some of the China headwinds you're going through?\nTim Cook: We have great results in a 
+number of emerging markets. And as you know from past calls, I'm particularly keen on India. India set a 
+December quarter record during the quarter. And we're opening more stores there. We've announced that 
+we're going to open four new stores there. We also, the iPhone was the top selling model in India for the 
+quarter. And it's the second largest smartphone market in the world and the third largest for PCs and tablets 
+and so there's a huge market and we are -- we have very modest share in these markets. And so I think there's 
+lots of upside there. And that's just one of the emerging markets.\nKevan Parekh: Yes, maybe I'll add, Amit, 
+that in emerging markets we're also seeing double-digit growth on the install base, both in total and for the 
+iPhone as well. So that's also an encouraging sign.\nAmit Daryanani: Perfect. Thank you. And then, you know, 
+just a question on gross margins for the March quarter. You folks are guiding gross margin is flattish on a 
+sequential basis. Typically, I think it tends to be guided up a little bit, 50 basis points, so sequentially. Can we 
+just touch on like, what are the offsets of the puts and takes you see here on gross margins? And Kevan, 
+maybe you can just talked about its FX having an outsized impact in your margin profile as well in 
+March?\nKevan Parekh: Yes, Amit, let me take that One. You know, as we mentioned in my remarks, we're 
+guiding to 46.5% to 47.5%. So we think it's, you know, we're very pleased with that level of guidance. As you 
+mentioned, there's always puts and takes. We do think there's going to be some FX headwinds, which we 
+talked about, that's going to affect, you know, our revenue growth as well. You know, it'll have an impact here 
+on the margin, a sequential impact on margins. But we think that's going to be offset by favorable costs and 
+the relative mix of services. We also, as you know, when we move from Q1 to Q2, especially on the product 
+side, because Q1 is such a large quarter for a products business, we do have a loss of leverage. So there are 
+some puts and takes, and I think we feel good about the range. We think it's a very, very strong guide for gross 
+margin.\nSuhasini Chandramouli: Thanks, Amit. Operator, could we get the next question, 
+please?\nOperator: Our next question is from Wamsi Mohan with Bank of America. Please go 
+ahead.\nWamsi Mohan: Yes, thank you so much. Tim, I want to follow-up on your comment about channel 
+inventory in China. I was wondering if you could maybe address more broadly if channel inventory across 
+your different product lines and regions? Do you feel they're elevated or out of range in any other regions? 
+And given the clearing event that kind of happened in China, I guess in the quarter, should we think of a more 
+normal progression quarter-on-quarter into the March quarter in China in particular, and I will follow.\nTim 
+Cook: Yes, I don't want to project sales for the current quarter by region, but if you if you look at the channel 
+inventory and look at iPhone in the aggregate, so on a worldwide basis we're very comfortable with our 
+channel inventory position in the -- in China my point was that our channel inventory reduced from the 
+beginning of the quarter to the end of the quarter, and that was over half of the reduction in the reported 
+results. And so if you look, part of the reason for that is that our sales were a bit higher than we forecasted 
+them to be toward the end of the quarter. And so we ended a little leaner than we had expected to.\nWamsi 
+Mohan: Okay, that's very clear. Thank you.\nTim Cook: Yes, thank you.\nWamsi Mohan: And then maybe as 
+my follow-up, your services growth has been very strong and I know you've kind of been navigating some 
+pretty challenging regulatory burdens on the business globally. So how should investors think about maybe 
+either a top line or margin headwind that let's say you're currently absorbing in your results that could 
+potentially maybe reverse in a more balanced regulatory environment? Thank you so much.\nKevan Parekh: 
+Yes. So I think one, I just wanted to kind of reiterate the fact that, you know, our services business had an all-
+time record for December quarter of 14%. And that was a one strength that we saw across all geographic 
+segments and also was very broad base across all of our services. So we have, as you know, a very broad 
+services portfolio. And so we do see, you know, good momentum across the board. And as well, we continue 
+to see increasing engagement across the customer base, across all of the service offerings, both transacting 
+and paid accounts. We talked about reaching all-time highs, and we have over now 1 billion paid 
+subscriptions across the services platform.\nSuhasini Chandramouli: All right. Thanks, Wamsi. Operator, 
+could we get the next question, please?\nOperator: Our next question is from Samik Chatterjee with 
+JPMorgan. Please go ahead.\nSamik Chatterjee: Hi. Thanks for taking my questions. I guess for the first one, if 
+I -- I mean, you had a great quarter on Macs and iPads both. And I'm just curious, in terms of if you can help 
+us think about the sustainability of this double-digit growth that you saw in both the product lines, and more 
+interest are also here, we are talking about Apple Intelligence sort of influencing volumes on iPhones, but any 
+thoughts on sort of how -- what does that influence look like in terms of volumes for Macs, for example, 
+where I think there's a lot of conversation on AI PCs, how you're thinking about the impact there? And I have a 
+quick follow-up. Thank you.\nTim Cook: Yes. If you look at Mac, Mac was up 16% and on iPad, we were up 
+15%. The Mac was driven by the very strong uptake on our new products during the quarter and the continued 
+success of the MacBook Air. And so as you know, we've launched an M4-based MacBook Pro, an iMac and a 
+Mac Mini during the quarter. We believe we've got the best AI PC out there for running workloads. The silicon 
+in the Mac is, and it has been for several years now, designed by us and really designed for these workloads. 
+And so I don't want to project at the category level for the future, but we're incredibly pleased with both the 
+Mac and the iPad for the quarter.\nSamik Chatterjee: Okay. And Tim, I'm going to use your earlier discussion 
+about India as a strong emerging market to sort of ask you about the supply chain planning there in terms of 
+how much of the supply chain planning there that you're doing is more of a reflection of the growth 
+expectations from that market relative to in terms of diversification of the supply chain? And how should we 
+sort of think about that strategy in terms of that particular country? Thank you.\nTim Cook: Yes. If you look at 
+the manufacturing we do there, we do manufacturing both for the domestic market, and we export. And so in 
+-- our business needs a certain economies of scale for it to make sense to manufacture in country. And so 
+that really means that we're going to be both a use for the domestic market and an export market.\nSamik 
+Chatterjee: Great. Thank you.\nTim Cook: Yes, thanks.\nSuhasini Chandramouli: Thank you, Samik. 
+Operator, could we get the next question, please?\nOperator: Our next question is from David Vogt with UBS. 
+Please go ahead.\nDavid Vogt: Great, thanks, guys, for taking my question. So maybe, Tim, this is for you. I'm 
+trying to think about your commentary around Apple Intelligence being sort of a momentum driver for the 
+iPhone business. But when I think about your kind of framework for the March quarter, if I kind of adjust for 
+channel inventory over the last couple of years, kind of, feels like your iPhone revenue for the March quarter 
+is going to be relatively similar to the quarter two years ago and even the quarter last year? So how do we 
+square kind of the momentum versus kind of the iPhone business effectively really kind of unchanged over 
+the last couple of years? And then second, when I think about kind of the gross margin profile of the business, 
+obviously, you've done a great job in taking gross margins up. Where do you think we sit in terms of, on the 
+services side at least, where margins could go? It looks like the 75% margin has been incredibly successful 
+quarter. But just trying to get a sense for where do you think this number could go over the intermediate 
+term? Thank you.\nTim Cook: Yes. If you look at Apple Intelligence, what my point earlier was, that markets 
+where we had rolled out Apple Intelligence during the Q1 period performed better on a year-over-year basis 
+than markets where we had not. And so that gives us -- it's a positive indicator that we were pleased with. 
+There are many compelling reasons to upgrade. And the other thing I would say, that I think I mentioned 
+earlier, is that if you look at it from a launch to the end of the December quarter, and so that goes back to 
+September, the 16 family is outperforming the 15 family. And so I think those are two good data points. Our 
+next round of language rollouts will be in April. And so it will be at the -- in our Q3 quarter. And I'll let Kevan 
+take the gross margin question.\nDavid Vogt: Yes, great.\nKevan Parekh: Hi, David. How are you? So on the 
+Services gross margin, I think maybe just stepping back a second. Services business in general in aggregate 
+is accretive to the overall company margin. And one of the things, as an important reminder, is we've got a 
+very broad services portfolio. And those businesses have very different margin profiles. And so I think, one, 
+it's because of the nature of those businesses and in part also because of the way we account for them. And 
+so one of the big factors that drive the Services gross margins and relative performance of those different 
+businesses within the portfolio. We also have the dynamic of some scale businesses like payment services, 
+iCloud, that are actually growing. And there, when we add incremental users, those end up being accretive to 
+margins as well. And so in general, what we saw in the December quarter was nice momentum across our 
+entire services business that allows us to deliver that 75% margin at the services level. And I think our 
+guidance takes into consideration what we think we're going to land from a company standpoint of 46.5% to 
+47.5%, which again, we think is a strong guide.\nDavid Vogt: Great, thanks, guys.\nSuhasini Chandramouli: 
+All right, thank you, David. Operator, could we have the next question, please?\nOperator: Our next question 
+is from Krish Sankar with TD Cowen. Please go ahead.\nKrish Sankar: Yes, thanks for taking my question. I 
+also had two of them. One, the first one for Tim. You had very strong Mac growth, 16% year-over-year last 
+quarter. Just wondering how much of that was driven by some of the Mac silicon innovation versus a 
+replacement cycle for Macs?\nTim Cook: I don't know the answer to your question precisely, but I think it is a 
+combination of these products are so compelling, the M4-based products are so compelling, that it's driving 
+both upgrades at the double-digit level and it's driving switchers at a double-digit level. And so we're seeing 
+both come out, and I think it's just because of the compelling products.\nKrish Sankar: Got it. Got it. Thanks 
+for that, Tim. And then a follow-up for Kevan on the gross margin. I want to ask you on the product side. Last 
+quarter, you had 39.3%, which is very strong, similar to a year ago period. I'm kind of curious how much more 
+levels do you have on the product side to improve the gross margin? Or do you think with some of the more 
+new AI-related devices, there's more upside to gross margin from here on the product hardware 
+side?\nKevan Parekh: Yes. Thanks, Krish, for the question. So on the product side, as you mentioned, we had 
+pretty strong sequential improvement, 300 basis points, for the December quarter. That was really driven by, 
+we talked about, favorable mix and leverage. As you know, in Q1, again, it's a launch quarter for many 
+products, and so we tend to benefit from the leverage that we get from that higher volume. I would say, in 
+general, our gross margin on products is driven by a number of factors. One of them is the various product 
+launches that we have. Different products do have different margin profiles. And so that mix does make a 
+difference. And in particular, what we're seeing is, for example, many of our mix is across like phone, for 
+example, we're seeing customers gravitate towards our Pro products because of things like affordability that 
+allows our customers to get into our best products, which have favorable gross margins. So we're continuing 
+to see that trend, that impacted us in the December quarter. As well, I think we're in a favorable commodity 
+environment from a cost standpoint. And so we're benefiting from that as well in the December quarter. And 
+then that's going to be, as we talked about, we're going to have a foreign exchange headwind heading into the 
+March quarter, but we figured that's contemplated in the guidance range that we gave, the 46.5% to 
+47.5%.\nKrish Sankar: Thanks, Kevan. Thanks, Tim.\nSuhasini Chandramouli: Thank you, Krish. Operator, 
+could we get the next question, please?\nOperator: Our next question is from Richard Kramer with Arete 
+Research. Please go ahead.\nRichard Kramer: Thanks very much. My first question is for Tim. I'd like to ask 
+about what might accelerate the pace of Apple Intelligence adoption. I guess do you see this simply as a 
+question of time i.e., to launch more markets and languages or increase the percentage of installed base 
+devices that can support it? Or is it a question of money, i.e., shifting R&D or marketing spend towards AI? 
+And based on other prior Apple services, do you expect a sort of tipping point where adoption will go 
+mainstream? Thanks.\nTim Cook: I do believe it will go mainstream. I'm getting feedback from people using 
+different features today. And this is -- keep in mind that on the iPhone side of our business, you either have to 
+have an iPhone 15 Pro or iPhone 16 to use Apple Intelligence. And so the -- as that base grows, I think the 
+usage will continue to grow. And I think -- I know from my own personal experience, once you start using the 
+features, you can't imagine not using them anymore. I know I get 100s of e-mails a day, and the 
+summarization function is so important. So I think it's a combination of that. And of course, in April, we roll 
+out a whole series of new languages that we had mentioned, and so the base grows further.\nRichard 
+Kramer: Okay, thank you. And then, Kevan, one of Luca's legacies was really getting Apple to record margin 
+levels and also maintaining very consistent pricing across the product range. But taking the current high 
+levels of profitability as fairly stable, what observations might you share about price sensitivity of users and 
+whether having a wider range of pricing across the products might unlocks potentially further market share 
+gains or boost overall product growth?\nKevan Parekh: Yes, it's a good question. I think one, I don't think 
+we're going to really depart from what served us pretty well to now. I mean we always take it into 
+consideration, looking at short-term -- comparison between the short term and the long term. I think we've 
+had a pretty disciplined pricing strategy, which would serve us pretty well. And I think we're going to 
+continually kind of stick with that as far as I can tell.\nRichard Kramer: Okay, thanks.\nSuhasini 
+Chandramouli: Thank you, Richard. Operator, could we get the next question, please?\nOperator: Our next 
+question is from Atif Malik with Citi. Please go ahead.\nAtif Malik: Hi, thank you for taking my question. How 
+do you guys see the potential tariff impact to your product for consumer demand under Trump 2.0 you guys 
+did find under Trump 1.0?\nTim Cook: We are monitoring the situation and don't have anything more to add 
+than that.\nAtif Malik: Great. And Tim, as a follow-up, there is a lot of discussion on agentic AI, the use of 
+agents. Do you guys see the upgraded series expected in April as something that will, let's say, be the killer 
+application among the suite of features that you have announced in Apple Intelligence?\nTim Cook: I think 
+the killer feature is different for different people. But I think for most, they're going to find that they're going to 
+use many of the features every day. And certainly, one of those is the -- is Siri, and that will be coming over 
+the next several months.\nAtif Malik: Thank you.\nSuhasini Chandramouli: All right. Thank you, Atif. Operator, 
+could we please get the last question?\nOperator: Our last question is from Ben Bollin from Cleveland 
+Research Company. Please go ahead.\nBen Bollin: Good evening, everyone. Thanks for taking the question. 
+Tim, I'm interested in your thoughts and how you would have us think about the average useful life of these 
+devices in the wild. And in particular, curious, if you look at the strength you saw in fiscal ?21 and how that 
+might support accelerated refresh opportunity into the future?\nTim Cook: Yes. Ben, I think it's different for 
+different types of users. I mean you have very early adopter kind of users that are very quick to jump on the 
+latest technology that upgrade very frequently. And then you have people that are on the entire opposite side 
+of that barbell. And most people are between those two points. And so I do think there were lots of units that 
+are sold during the COVID period of time, and it's a huge opportunity for us as a company to -- for more than 
+one of the product categories.\nBen Bollin: That?s it from me. Thanks, Tim.\nTim Cook: Thank you.\nSuhasini 
+Chandramouli: All right. Thanks, Ben. A replay of today's call will be available for two weeks on Apple 
+Podcasts or as a webcast on apple.com/investor and via telephone. The number for the telephone replay is 
+866-583-1035. Please enter confirmation code 7398532 followed by the pound sign. These replays will be 
+available by approximately 5 p.m. at Pacific Time today. Members of the press with additional questions can 
+contact Josh Rosenstock at 408-862-1142. And financial analysts can contact me, Suhasini Chandramouli, 
+with additional questions at 408-974-3123. Thanks again for joining us here today.\nOperator: Once again, 
+this does conclude today's conference. We do appreciate your participation."
+

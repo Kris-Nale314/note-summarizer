@@ -14,6 +14,8 @@ from wordcloud import WordCloud, STOPWORDS
 from summarizer import TranscriptSummarizer, SummaryOptions
 from summarizer.multi_document_processor import MultiDocumentProcessor
 
+
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -490,3 +492,12 @@ def display_multi_document_results(result: Dict[str, Any], processing_time: floa
                 st.error(f"Error generating visualization: {str(e)}")
         else:
             st.info("Insufficient text data for visualization.")
+
+    # Get appropriate name based on document type
+    if "metadata" in result and "document_type" in result["metadata"]:
+        doc_type = result["metadata"]["document_type"]
+    else:
+        doc_type = "multi-document"
+        
+    file_path = auto_save_results(title, doc_type, result, None)
+    st.info(f"✅ Analysis automatically saved to: {file_path}")
