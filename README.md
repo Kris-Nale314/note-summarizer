@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="Note-Summarizer Logo" width="250"/>
+  <img src="docs/images/logo.svg" alt="Note-Summarizer Logo" width="250"/>
 </p>
 
 <h1 align="center">🎙️   Note-Summarizer    📝 </h1>
@@ -15,47 +15,20 @@
 
 ## 📝 What Is This?
 
-`Note-Summarizer` is a practical tool that turns long meeting transcripts, earnings calls, and other text-heavy content into organized, actionable summaries. It's designed to solve a real problem: helping busy professionals extract meaningful insights from the mountains of text generated in today's workplace.
+`Note-Summarizer` is a practical tool that turns long meeting transcripts, especially from Microsoft Teams, into organized, actionable summaries. It's designed for busy professionals who need to quickly extract meaningful insights from lengthy meeting text.
 
-Whether you're drowning in `Microsoft Teams` meeting transcripts, trying to parse earnings calls for key insights, or making sense of lengthy interviews, Note-Summarizer has you covered!
+The current version focuses on delivering clean, well-structured summaries with minimal complexity, prioritizing core functionality to save you time.
 
-## 🌟 Why I Built This
+## 🌟 Current Features
 
-If you've ever received a 30-page meeting transcript and thought "I don't have time to read all this..." - you're not alone! 
-
-While tools like `Microsoft Copilot` are making strides in summarization, they often miss critical details, speaker dynamics, and nuances that make the difference between a useful summary and a vague overview.
-
-I built `Note-Summarizer` to apply advanced AI techniques to this everyday problem, creating a practical tool that helps me (and hopefully you!) work more efficiently and effectively.
-
-## 💎 What Makes This Special
-
-- **Intelligent Division Strategies** - Five different approaches to break down documents:
-  - ✂️ **Basic**: Smart simple division for any document type
-  - 🗣️ **Speaker**: Preserves conversation flow and speaker attribution
-  - 📑 **Boundary**: Respects document structure like headings and paragraphs
-  - 🧠 **Context-Aware**: Maintains semantic coherence and topical relationships
-  - 🔍 **Semantic**: AI-powered chunking that detects natural topic transitions (NEW!)
-
-- **Tiered Processing for Large Documents** - Optimized pipeline for processing very long texts (NEW!)
-  - Uses faster models for initial summarization
-  - Preserves powerful models for final synthesis
-  - Automatically detects when to apply this approach
-
-- **Multi-Document Processing** - Compare and analyze multiple related documents (NEW!)
-  - **Earnings Call Comparisons**: Compare financials across multiple companies
-  - **Sequential Analysis**: Track company performance over multiple quarters
-  - **Cross-Document Synthesis**: Generate insights across related documents
-
-- **Enhanced Visualizations** - Interactive insights to understand your documents (NEW!)
-  - Strategy performance comparisons
-  - Document structure analysis
-  - Smart strategy recommendations
-
-- **Side-by-Side Comparison** - See which strategy works best for your specific content
-
-- **Actionable Results** - Automatically extract tasks, commitments, and follow-up items
-
-- **Interactive Visualizations** - Word clouds and metrics to quickly grasp key themes
+- **Context-Aware Summarization** - Automatically detects meeting purpose and important topics
+- **Smart Speaker Detection** - Preserves speaker attributions for key points
+- **Teams Transcript Optimization** - Specially designed for Microsoft Teams meeting transcripts
+- **Customizable Detail Levels** - Choose between brief, standard, or detailed summaries
+- **Automatic Action Item Extraction** - Identifies tasks, commitments, and follow-ups
+- **Keyword Extraction** - Highlights the most important topics across the transcript
+- **Auto-Save Functionality** - Saves summaries with metadata for future reference
+- **Clean, Modern Interface** - Easy-to-use design that works in both light and dark modes
 
 ## 🚀 Getting Started
 
@@ -84,48 +57,32 @@ echo "OPENAI_API_KEY=your-api-key-here" > .env
 streamlit run app.py
 ```
 
-### Using Docker
-
-```bash
-# Build and run with Docker
-docker-compose up -d
-```
-
 ## 🛠️ The Tech Behind It
 
-Note-Summarizer uses a modular, extensible architecture:
+Note-Summarizer uses an innovative, streamlined architecture:
 
-1. **Smart Document Division** - Rather than arbitrary chunks, the app uses intelligent strategies to divide documents in ways that preserve meaning
+1. **Async Processing** - Processes transcript sections concurrently for faster results
+2. **Smart Transcript Splitting** - Special handling for Teams transcript speaker patterns
+3. **Two-Pass Analysis** - First analyzes meeting context, then creates focused summaries
+4. **Topic Relevance Scoring** - Identifies and prioritizes the most important discussion points
+5. **Contextual Synthesis** - Creates summaries focused on meeting purpose and goals
 
-2. **Advanced Semantic Processing** - Uses AI embeddings to detect natural topic transitions in documents
+## 🔮 Roadmap & Work in Progress
 
-3. **LLM-Powered Summarization** - Leverages OpenAI's models with carefully crafted prompts specific to each document type
+This is an active development project with several exciting enhancements planned:
 
-4. **Multi-Stage Processing Pipeline** - Optimized approach for different document sizes and complexities
-
-5. **Adaptable Processing Pipeline** - Customized approaches for different content types (transcripts, articles, technical documents)
-
-6. **Flexible LLM Integration** - Support for OpenAI models with the ability to extend to other providers via LiteLLM
+- **AI Agent Architecture** - Transitioning to specialized agents for different processing tasks
+- **CrewAI Integration** - Implementing CrewAI for coordinated agent collaboration
+- **Expanded Document Types** - Adding support for earnings calls, articles, and technical documents
+- **Enhanced Interactive Visualizations** - Adding topic networks and importance heatmaps
+- **Multi-Document Processing** - Enabling comparison across related documents
 
 ## 💼 Real-World Applications
 
 - **Meeting Follow-ups**: Transform hour-long team meetings into concise action plans
-- **Earnings Call Analysis**: Extract key financial insights and executive commentary
-- **Research Synthesis**: Condense interviews and discussions into structured findings
-- **News Monitoring**: Stay on top of industry news without reading every article
-- **Document Review**: Quickly grasp the essence of long reports and documentation
-- **Multi-Company Comparison**: Analyze multiple earnings calls to identify industry trends (NEW!)
-- **Sequential Analysis**: Track changes across multiple quarters or meetings (NEW!)
-
-## 🧠 Choosing the Right Strategy
-
-Different content types benefit from different division strategies:
-
-- **Meetings & Interviews**: The speaker strategy excels at preserving conversational flow
-- **Articles & Reports**: Try the boundary strategy to respect the author's organization
-- **Complex Technical Content**: Context-aware often produces the most coherent results
-- **Very Long Documents**: Semantic strategy offers the best topic transitions
-- **Mixed Content**: Compare all strategies side-by-side to find what works best
+- **Knowledge Management**: Create searchable archives of meeting insights
+- **Time Savings**: Get the essence of meetings you couldn't attend
+- **Team Alignment**: Ensure everyone has the same understanding of discussion outcomes
 
 ## 📜 License
 
