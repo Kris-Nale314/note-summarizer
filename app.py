@@ -1,7 +1,6 @@
 """
 Main Streamlit application for Note-Summarizer.
-Clean, minimalist design with dark mode support, logo integration and auto-save feature.
-Fixed for latest Streamlit API.
+Enhanced with context-aware processing and metadata extraction.
 """
 
 import os
@@ -136,6 +135,33 @@ st.markdown("""
         width: 180px;
         height: auto;
     }
+    
+    /* Metadata card styling */
+    .metadata-card {
+        border-radius: 8px;
+        padding: 1rem;
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        margin-top: 1rem;
+        background-color: rgba(128, 128, 128, 0.05);
+    }
+    
+    /* Badge styling for keywords */
+    .keyword-badge {
+        display: inline-block;
+        background-color: rgba(0, 120, 212, 0.1);
+        color: var(--text-color);
+        border-radius: 16px;
+        padding: 0.25rem 0.75rem;
+        margin: 0.25rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Custom colors for importance indicators */
+    .importance-1 { color: rgba(180, 180, 180, 0.8); }
+    .importance-2 { color: rgba(180, 180, 180, 0.9); }
+    .importance-3 { color: rgba(255, 255, 255, 0.95); }
+    .importance-4 { color: rgba(255, 255, 100, 0.9); }
+    .importance-5 { color: rgba(255, 150, 0, 0.95); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -152,12 +178,12 @@ def try_decode_file(file_content, encodings=('utf-8', 'latin-1', 'cp1252', 'asci
         except UnicodeDecodeError:
             continue
     
-    # If all decoding attempts fail, use replacement mode with utf-8
+    # If all decoding attempts fails, use replacement mode with utf-8
     return file_content.decode('utf-8', errors='replace')
 
 
-def process_text(text, model_name, include_action_items, progress_container):
-    """Process the text and return summary."""
+def process_text(text, model_name, include_action_items, detail_level, progress_container):
+    """Process the text and return summary with enhanced metadata."""
     options = SummaryOptions(
         model_name=model_name,
         include_action_items=include_action_items
@@ -185,7 +211,7 @@ def process_text(text, model_name, include_action_items, progress_container):
     return result
 
 
-def save_summary(result, filename_base=None):
+def save_summary(result, filename_base=None, detail_level="standard"):
     """Save the summary to the outputs directory."""
     # Generate filename with timestamp
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
@@ -199,7 +225,7 @@ def save_summary(result, filename_base=None):
     
     # Create the markdown summary
     summary_md = f"# Transcript Summary\n\n"
-    summary_md += f"*Generated on: {datetime.now().strftime('%Y-%m-%d at %H:%M:%S')}*\n\n"
+    summary_md += f"*Generated on: {datetime.now().strftime('%Y-%m-%d at %H:%M:%S')} with {detail_level} detail level*\n\n"
     summary_md += f"## Summary\n\n{result['summary']}\n\n"
     
     if result.get('action_items'):
@@ -210,6 +236,16 @@ def save_summary(result, filename_base=None):
     summary_md += f"- **Model:** {result['metadata'].get('model', 'Unknown')}\n"
     summary_md += f"- **Processing Time:** {result['metadata'].get('processing_time_seconds', 0):.2f} seconds\n"
     summary_md += f"- **Sections:** {result['metadata'].get('division_count', 0)}\n"
+    
+    # Add extracted keywords if available
+    if result.get('division_metadata'):
+        all_keywords = set()
+        for section in result['division_metadata']:
+            if 'keywords' in section:
+                all_keywords.update(section['keywords'])
+        
+        if all_keywords:
+            summary_md += f"- **Key Topics:** {', '.join(sorted(all_keywords)[:15])}\n"
     
     # Save markdown file
     md_path = OUTPUTS_DIR / f"{filename}.md"
@@ -222,7 +258,8 @@ def save_summary(result, filename_base=None):
         json.dump({
             "summary": result["summary"],
             "action_items": result.get("action_items"),
-            "metadata": result["metadata"]
+            "metadata": result["metadata"],
+            "division_metadata": result.get("division_metadata", [])
         }, f, indent=2)
     
     return md_path
@@ -280,6 +317,52 @@ def get_logo_path():
     return None
 
 
+def extract_keywords_from_metadata(division_metadata):
+    """Extract unique keywords from section metadata with their importance."""
+    keyword_map = {}
+    
+    # Go through each section's metadata
+    for section in division_metadata:
+        if 'keywords' in section and isinstance(section['keywords'], list):
+            importance = section.get('importance', 3)
+            
+            # Add each keyword with its importance
+            for keyword in section['keywords']:
+                if keyword in keyword_map:
+                    # If keyword already exists, use the higher importance
+                    keyword_map[keyword] = max(keyword_map[keyword], importance)
+                else:
+                    keyword_map[keyword] = importance
+    
+    # Convert to a list of dictionary objects
+    keywords = [{"keyword": k, "importance": v} for k, v in keyword_map.items()]
+    
+    # Sort by importance (high to low)
+    keywords.sort(key=lambda x: x["importance"], reverse=True)
+    
+    return keywords
+
+
+def display_keywords(keywords, max_display=20):
+    """Display keywords as badges with importance-based styling."""
+    if not keywords:
+        return
+    
+    st.markdown("### Key Topics")
+    
+    # Display limited number of keywords
+    display_count = min(len(keywords), max_display)
+    
+    # Create HTML for keyword badges
+    html = ""
+    for i in range(display_count):
+        keyword = keywords[i]["keyword"]
+        importance = keywords[i]["importance"]
+        html += f'<span class="keyword-badge importance-{importance}">{keyword}</span>'
+    
+    st.markdown(html, unsafe_allow_html=True)
+
+
 def main():
     # Initialize session state for tab selection
     if "active_tab" not in st.session_state:
@@ -289,7 +372,7 @@ def main():
     logo_path = get_logo_path()
     if logo_path:
         st.markdown('<div class="logo-container">', unsafe_allow_html=True)
-        st.image(logo_path, use_container_width=False, width=180)
+        st.image(logo_path, width=180)
         st.markdown('</div>', unsafe_allow_html=True)
     
     # Header (simplified if logo is present)
@@ -349,14 +432,24 @@ def main():
                 # Divider
                 st.markdown("---")
                 
-                # Model selection
+                # Settings section
                 st.subheader("Settings")
                 
+                # Model selection
                 model_choice = st.selectbox(
                     "Model",
                     ["gpt-3.5-turbo", "gpt-4"],
                     index=0,
                     help="GPT-4 provides higher quality summaries but costs more and processes slower"
+                )
+                
+                # Detail level (new option)
+                detail_level = st.radio(
+                    "Detail Level",
+                    ["brief", "standard", "detailed"],
+                    index=1,
+                    help="Controls how detailed the final summary will be",
+                    horizontal=True
                 )
                 
                 include_action_items = st.checkbox(
@@ -412,17 +505,24 @@ def main():
                         # Process the text
                         with st.spinner():
                             start_time = time.time()
-                            result = process_text(input_text, model_choice, include_action_items, progress_container)
+                            result = process_text(input_text, model_choice, include_action_items, detail_level, progress_container)
                             
                             # Auto-save the summary
-                            saved_path = save_summary(result, filename_base)
+                            saved_path = save_summary(result, filename_base, detail_level)
                             
                             # Display success message
                             st.success(f"Summary generated in {result['metadata']['processing_time_seconds']:.2f} seconds")
                             st.info(f"Saved to: {saved_path}")
                             
+                            # Extract keywords from metadata
+                            keywords = extract_keywords_from_metadata(result.get('division_metadata', []))
+                            
+                            # Display keywords if available
+                            if keywords:
+                                display_keywords(keywords)
+                            
                             # Display tabs for different parts of the output
-                            result_tabs = st.tabs(["📄 Summary", "✅ Action Items"])
+                            result_tabs = st.tabs(["📄 Summary", "✅ Action Items", "🔍 Details"])
                             
                             with result_tabs[0]:
                                 st.markdown(result["summary"])
@@ -448,6 +548,41 @@ def main():
                                     )
                                 else:
                                     st.info("No action items were extracted or action item extraction was disabled.")
+                            
+                            # New tab for metadata details
+                            with result_tabs[2]:
+                                st.subheader("Processing Details")
+                                
+                                col_a, col_b = st.columns(2)
+                                with col_a:
+                                    st.metric("Sections Processed", result['metadata'].get('division_count', 0))
+                                with col_b:
+                                    st.metric("Processing Time", f"{result['metadata'].get('processing_time_seconds', 0):.2f}s")
+                                
+                                # Show transcript type
+                                is_teams = result['metadata'].get('is_teams_transcript', False)
+                                transcript_type = "Microsoft Teams" if is_teams else "Generic"
+                                st.info(f"Detected transcript type: {transcript_type}")
+                                
+                                # Section metadata
+                                if result.get('division_metadata'):
+                                    with st.expander("Section Details", expanded=False):
+                                        for i, section in enumerate(result['division_metadata']):
+                                            st.markdown(f"### Section {i+1} ({section.get('position', 'unknown')})")
+                                            
+                                            # Show importance
+                                            importance = section.get('importance', 3)
+                                            st.progress(importance / 5, text=f"Importance: {importance}/5")
+                                            
+                                            # Show keywords
+                                            if 'keywords' in section:
+                                                st.markdown("**Keywords:** " + ", ".join(section['keywords']))
+                                            
+                                            # Show speakers if available
+                                            if 'speakers' in section and section['speakers']:
+                                                st.markdown("**Speakers:** " + ", ".join(section['speakers']))
+                                            
+                                            st.markdown("---")
                         
                         st.markdown('</div>', unsafe_allow_html=True)
                 else:
@@ -510,17 +645,37 @@ def main():
                         with open(summary_path, "r", encoding="utf-8") as f:
                             summary_content = f.read()
                         
+                        # Try to load JSON version for metadata
+                        json_path = summary_path.with_suffix('.json')
+                        metadata = None
+                        if json_path.exists():
+                            try:
+                                with open(json_path, 'r', encoding='utf-8') as f:
+                                    metadata = json.load(f)
+                            except:
+                                pass
+                        
                         with selected_summary_container:
                             st.markdown('<div class="output-area">', unsafe_allow_html=True)
+                            
+                            # Display the keywords if available in metadata
+                            if metadata and 'division_metadata' in metadata:
+                                keywords = extract_keywords_from_metadata(metadata['division_metadata'])
+                                if keywords:
+                                    display_keywords(keywords)
+                            
+                            # Display summary content
                             st.markdown(summary_content)
                             
                             # Download button
-                            st.download_button(
-                                label="Download Summary",
-                                data=summary_content,
-                                file_name=summary_path.name,
-                                mime="text/markdown"
-                            )
+                            col_a, col_b = st.columns([4, 1])
+                            with col_b:
+                                st.download_button(
+                                    label="Download",
+                                    data=summary_content,
+                                    file_name=summary_path.name,
+                                    mime="text/markdown"
+                                )
                             
                             st.markdown('</div>', unsafe_allow_html=True)
                     except Exception as e:
