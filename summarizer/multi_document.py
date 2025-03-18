@@ -10,7 +10,7 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 from collections import defaultdict
 
-from .core import TranscriptSummarizer
+from ..docs.core_old import TranscriptSummarizer
 from .options import SummaryOptions
 
 logger = logging.getLogger(__name__)

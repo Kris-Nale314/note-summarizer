@@ -1,9 +1,7 @@
+# summarizer/__init__.py
 """
-Note Summarizer package for transforming documents into comprehensive summaries.
+Note-Summarizer package.
 """
 
-from .core import TranscriptSummarizer
 from .options import SummaryOptions
-from .division import divide_document, extract_speakers
-
-__all__ = ['TranscriptSummarizer', 'SummaryOptions', 'divide_document', 'extract_speakers']
+from .summarizer import AsyncTranscriptSummarizer as TranscriptSummarizer

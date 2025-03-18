@@ -3,13 +3,21 @@ LiteLLM adapter for multi-provider support.
 """
 
 import os
+import asyncio
 import logging
+import nest_asyncio  # You'll need to install this: pip install nest_asyncio
 from typing import Optional
 from .base import LLMAdapter
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Allow nested event loops
+try:
+    nest_asyncio.apply()
+except Exception as e:
+    logger.warning(f"Could not apply nest_asyncio: {e}")
 
 class LiteLLMAdapter(LLMAdapter):
     """LiteLLM adapter for multi-provider support."""
@@ -49,15 +57,7 @@ class LiteLLMAdapter(LLMAdapter):
             Generated text
         """
         try:
-            # Check if prompt may be too long and truncate if needed
-            if len(prompt) > 12000 and "gpt-3.5-turbo" in self.model and "16k" not in self.model:
-                logger.warning(f"Prompt may be too long ({len(prompt)} chars), truncating for {self.model}")
-                prompt_length = len(prompt)
-                keep_chars = 10000
-                half = keep_chars // 2
-                prompt = prompt[:half] + "\n\n[...content truncated for length...]\n\n" + prompt[-half:]
-                logger.info(f"Truncated prompt from {prompt_length} to {len(prompt)} chars")
-            
+            # Non-async direct call to avoid event loop issues
             response = self.litellm.completion(
                 model=self.model,
                 messages=[

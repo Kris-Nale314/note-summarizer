@@ -13,6 +13,7 @@ pandas
 typing-extensions
 matplotlib
 litellm
+nest-asyncio
 
 # OpenAI client
 openai
