@@ -1,5 +1,5 @@
 """
-Clean orchestrator module that seamlessly integrates enhanced features with lean architecture.
+Enhanced orchestrator that integrates specialized document passes with the base processing pipeline.
 """
 
 import asyncio
@@ -11,8 +11,8 @@ logger = logging.getLogger(__name__)
 
 class Orchestrator:
     """
-    Orchestrates the document processing pipeline with a focus on balanced detail 
-    preservation and hierarchical processing.
+    Enhanced orchestrator that supports specialized document passes on top of
+    the base hierarchical processing pipeline.
     """
     
     def __init__(self, 
@@ -21,9 +21,10 @@ class Orchestrator:
                  document_chunker, 
                  chunk_summarizer, 
                  synthesizer,
+                 pass_manager=None,  # New parameter for pass processing
                  options=None):
         """
-        Initialize the orchestrator with component instances and options.
+        Initialize the enhanced orchestrator with component instances and options.
         
         Args:
             llm_client: LLM client for generating completions
@@ -31,6 +32,7 @@ class Orchestrator:
             document_chunker: DocumentChunker for splitting text into chunks
             chunk_summarizer: ChunkSummarizer for processing individual chunks
             synthesizer: Synthesizer for creating final summaries
+            pass_manager: PassManager for specialized document passes
             options: ProcessingOptions instance with configuration
         """
         self.llm_client = llm_client
@@ -38,6 +40,7 @@ class Orchestrator:
         self.document_chunker = document_chunker
         self.chunk_summarizer = chunk_summarizer
         self.synthesizer = synthesizer
+        self.pass_manager = pass_manager
         self.options = options
         
         # Import here to avoid circular imports
@@ -51,7 +54,7 @@ class Orchestrator:
     
     async def process_document(self, text: str, progress_callback=None) -> Dict[str, Any]:
         """
-        Process a document through the complete pipeline.
+        Process a document through the complete pipeline with optional passes.
         
         Args:
             text: Document text to process
@@ -59,11 +62,20 @@ class Orchestrator:
                                Function signature: callback(progress_float, status_message)
             
         Returns:
-            Dictionary with complete summary and metadata
+            Dictionary with complete summary and metadata, including pass results if applicable
         """
         # Start timing
         start_time = time.time()
-        total_steps = 5  # analyze, chunk, summarize, synthesize, extract actions
+        
+        # Check if passes are requested
+        requested_passes = []
+        if self.pass_manager and hasattr(self.options, 'passes') and self.options.passes:
+            requested_passes = self.options.passes
+            # Add one step for pass processing if passes are requested
+            total_steps = 6  # analyze, chunk, summarize, synthesize, extract actions, run passes
+        else:
+            total_steps = 5  # analyze, chunk, summarize, synthesize, extract actions
+            
         current_step = 0
         
         # Set LLM temperature if available
@@ -73,6 +85,9 @@ class Orchestrator:
             self.llm_client.temperature = self.options.temperature
         
         try:
+            # Steps 1-4: Standard document processing
+            # (This part remains the same as in the original Orchestrator)
+            
             # Step 1: Analyze document to get context
             logger.info("Starting document analysis")
             self._update_progress(progress_callback, current_step / total_steps, "Analyzing document...")
@@ -170,6 +185,9 @@ class Orchestrator:
                 'document_info': document_context
             }
             
+            # Save chunk summaries for pass processing
+            result['chunk_summaries'] = chunk_summaries
+            
             # Extract key topics from the result if available
             if hasattr(self.synthesizer, 'extract_topics'):
                 result['key_topics'] = await self.synthesizer.extract_topics(chunk_summaries)
@@ -192,6 +210,38 @@ class Orchestrator:
                     action_items = self._extract_action_items_fallback(chunk_summaries)
                     result['action_items'] = action_items
             
+            current_step += 1
+            
+            # Step 6: Run requested document passes if any
+            if self.pass_manager and requested_passes:
+                self._update_progress(progress_callback, current_step / total_steps, 
+                                    f"Running specialized passes: {', '.join(requested_passes)}...")
+                
+                # Create context for pass processing
+                pass_context = {
+                    'document_info': document_context,
+                    'summary': synthesis_result,
+                    'chunk_summaries': chunk_summaries,
+                    'key_topics': result.get('key_topics', []),
+                    'action_items': result.get('action_items', [])
+                }
+                
+                # Run all requested passes
+                pass_results = await self.pass_manager.run_multiple_passes(
+                    requested_passes, text, pass_context
+                )
+                
+                # Add pass results to the final result
+                if pass_results:
+                    result['pass_results'] = pass_results
+                    
+                    # Add a list of successful passes
+                    successful_passes = [
+                        name for name, pr in pass_results.items() 
+                        if pr.get('status') == 'success'
+                    ]
+                    result['successful_passes'] = successful_passes
+            
             # Calculate processing time
             elapsed_time = time.time() - start_time
             
@@ -203,7 +253,8 @@ class Orchestrator:
                     'detail_level': detail_level,
                     'model': getattr(self.llm_client, 'model', 'unknown'),
                     'temperature': getattr(self.options, 'temperature', 0.2),
-                    'timestamp': time.time()
+                    'timestamp': time.time(),
+                    'passes_applied': requested_passes if requested_passes else []
                 }
             
             # Add hierarchical metadata
