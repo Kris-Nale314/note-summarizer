@@ -1,5 +1,5 @@
 """
-Configuration options for the lean summarization engine.
+Configuration options for the enhanced lean summarization engine.
 """
 
 from dataclasses import dataclass
@@ -7,9 +7,10 @@ from typing import Optional, List
 
 @dataclass
 class ProcessingOptions:
-    """Configuration options for document processing."""
+    """Configuration options for document processing with enhanced features."""
+    
     # Model configuration
-    model_name: str = "default"  # Default model name
+    model_name: str = "gpt-3.5-turbo"  # Default model name
     temperature: float = 0.2  # Controls randomness (0.0 to 1.0)
     
     # Chunking parameters
@@ -28,3 +29,6 @@ class ProcessingOptions:
     
     # Output options
     include_metadata: bool = True  # Include metadata in output
+    
+    # User guidance
+    user_instructions: Optional[str] = None  # Specific instructions from the user

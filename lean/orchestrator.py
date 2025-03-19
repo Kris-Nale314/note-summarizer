@@ -1,5 +1,5 @@
 """
-Orchestrator module that coordinates the document processing pipeline.
+Enhanced orchestrator module with action item extraction and user instructions support.
 """
 
 import asyncio
@@ -10,7 +10,7 @@ from typing import Dict, Any, List, Optional, Callable
 logger = logging.getLogger(__name__)
 
 class Orchestrator:
-    """Coordinates the document processing pipeline with a lean, focused approach."""
+    """Coordinates the document processing pipeline with advanced features."""
     
     def __init__(self, 
                  llm_client, 
@@ -35,30 +35,15 @@ class Orchestrator:
         self.document_chunker = document_chunker
         self.chunk_summarizer = chunk_summarizer
         self.synthesizer = synthesizer
+        self.options = options
         
-        # Use default options if none provided
-        if options is None:
-            from dataclasses import dataclass
-            
-            @dataclass
-            class DefaultOptions:
-                model_name: str = "default"
-                temperature: float = 0.2
-                min_chunks: int = 3
-                max_chunk_size: Optional[int] = None
-                preview_length: int = 2000
-                detail_level: str = "detailed"
-                include_action_items: bool = True
-                max_concurrent_chunks: int = 5
-                include_metadata: bool = True
-            
-            self.options = DefaultOptions()
-        else:
-            self.options = options
+        # Import here to avoid circular imports
+        from lean.itemizer import ActionItemExtractor
+        self.action_item_extractor = ActionItemExtractor(llm_client)
     
     async def process_document(self, text: str, progress_callback=None) -> Dict[str, Any]:
         """
-        Process a document through the complete pipeline.
+        Process a document through the complete pipeline with enhanced features.
         
         Args:
             text: Document text to process
@@ -70,7 +55,7 @@ class Orchestrator:
         """
         # Start timing
         start_time = time.time()
-        total_steps = 4  # analyze, chunk, summarize, synthesize
+        total_steps = 5  # analyze, chunk, summarize, synthesize, extract actions
         current_step = 0
         
         # Set LLM temperature if available
@@ -104,6 +89,11 @@ class Orchestrator:
             # Store total chunks in document context
             document_context = analysis_result.copy()
             document_context['total_chunks'] = len(chunks)
+            
+            # Apply user instructions if provided
+            if hasattr(self.options, 'user_instructions') and self.options.user_instructions:
+                document_context['user_instructions'] = self.options.user_instructions
+            
             current_step += 1
             
             # Step 3: Process chunks with concurrency control
@@ -152,14 +142,33 @@ class Orchestrator:
                 document_context=document_context
             )
             
-            # Calculate processing time
-            elapsed_time = time.time() - start_time
-            
-            # Create final result
+            # Create result dictionary
             result = {
                 'summary': synthesis_result,
                 'document_info': document_context
             }
+            
+            # Extract key topics from the result if available
+            if hasattr(self.synthesizer, 'extract_topics'):
+                result['key_topics'] = await self.synthesizer.extract_topics(chunk_summaries)
+            
+            current_step += 1
+            
+            # Step 5: Extract action items if requested
+            if self.options.include_action_items:
+                self._update_progress(progress_callback, current_step / total_steps, "Extracting action items...")
+                
+                # Use our dedicated action item extractor
+                action_items = await self.action_item_extractor.extract_action_items(
+                    chunk_summaries, 
+                    document_context
+                )
+                
+                # Add to result
+                result['action_items'] = action_items
+            
+            # Calculate processing time
+            elapsed_time = time.time() - start_time
             
             # Add metadata if requested
             if self.options.include_metadata:
@@ -171,6 +180,19 @@ class Orchestrator:
                     'temperature': self.options.temperature,
                     'timestamp': time.time()
                 }
+            
+            # Add hierarchical metadata if available from chunks
+            hierarchical_data = {}
+            for chunk in chunk_summaries:
+                if 'hierarchical_metadata' in chunk:
+                    for key, value in chunk['hierarchical_metadata'].items():
+                        if key in hierarchical_data:
+                            hierarchical_data[key] += value
+                        else:
+                            hierarchical_data[key] = value
+            
+            if hierarchical_data:
+                result['hierarchical_metadata'] = hierarchical_data
             
             # Update progress to complete
             self._update_progress(progress_callback, 1.0, "Processing complete")
