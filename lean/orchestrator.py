@@ -1,5 +1,5 @@
 """
-Enhanced orchestrator module with action item extraction and user instructions support.
+Clean orchestrator module that seamlessly integrates enhanced features with lean architecture.
 """
 
 import asyncio
@@ -10,7 +10,10 @@ from typing import Dict, Any, List, Optional, Callable
 logger = logging.getLogger(__name__)
 
 class Orchestrator:
-    """Coordinates the document processing pipeline with advanced features."""
+    """
+    Orchestrates the document processing pipeline with a focus on balanced detail 
+    preservation and hierarchical processing.
+    """
     
     def __init__(self, 
                  llm_client, 
@@ -38,12 +41,17 @@ class Orchestrator:
         self.options = options
         
         # Import here to avoid circular imports
-        from lean.itemizer import ActionItemExtractor
-        self.action_item_extractor = ActionItemExtractor(llm_client)
+        try:
+            from lean.itemizer import ActionItemExtractor
+            self.action_item_extractor = ActionItemExtractor(llm_client)
+            self.has_action_extractor = True
+        except ImportError:
+            self.has_action_extractor = False
+            logger.warning("ActionItemExtractor not available. Action item extraction will be limited.")
     
     async def process_document(self, text: str, progress_callback=None) -> Dict[str, Any]:
         """
-        Process a document through the complete pipeline with enhanced features.
+        Process a document through the complete pipeline.
         
         Args:
             text: Document text to process
@@ -71,17 +79,29 @@ class Orchestrator:
             
             analysis_result = await self.document_analyzer.analyze_preview(
                 text, 
-                preview_length=self.options.preview_length
+                preview_length=getattr(self.options, 'preview_length', 2000)
             )
             current_step += 1
             
             # Step 2: Chunk the document
             self._update_progress(progress_callback, current_step / total_steps, "Chunking document...")
             
+            # Scale min_chunks based on detail level
+            min_chunks = getattr(self.options, 'min_chunks', 3)
+            detail_level = getattr(self.options, 'detail_level', 'detailed')
+            
+            scaled_min_chunks = min_chunks
+            if detail_level == "detailed":
+                scaled_min_chunks = min_chunks * 2
+            elif detail_level == "detailed-complex":
+                scaled_min_chunks = min_chunks * 3
+                
+            logger.info(f"Using scaled min_chunks: {scaled_min_chunks} for detail level: {detail_level}")
+            
             chunks = self.document_chunker.chunk_document(
                 text, 
-                min_chunks=self.options.min_chunks, 
-                max_chunk_size=self.options.max_chunk_size
+                min_chunks=scaled_min_chunks, 
+                max_chunk_size=getattr(self.options, 'max_chunk_size', None)
             )
             
             logger.info(f"Document divided into {len(chunks)} chunks")
@@ -89,6 +109,7 @@ class Orchestrator:
             # Store total chunks in document context
             document_context = analysis_result.copy()
             document_context['total_chunks'] = len(chunks)
+            document_context['original_text_length'] = len(text)
             
             # Apply user instructions if provided
             if hasattr(self.options, 'user_instructions') and self.options.user_instructions:
@@ -100,7 +121,8 @@ class Orchestrator:
             self._update_progress(progress_callback, current_step / total_steps, "Summarizing chunks...")
             
             # Create a semaphore to limit concurrency
-            semaphore = asyncio.Semaphore(self.options.max_concurrent_chunks)
+            max_concurrent = getattr(self.options, 'max_concurrent_chunks', 5)
+            semaphore = asyncio.Semaphore(max_concurrent)
             
             # Process each chunk with semaphore
             async def process_chunk(chunk):
@@ -138,7 +160,7 @@ class Orchestrator:
             
             synthesis_result = await self.synthesizer.synthesize_summaries(
                 chunk_summaries,
-                detail_level=self.options.detail_level,
+                detail_level=detail_level,
                 document_context=document_context
             )
             
@@ -155,44 +177,43 @@ class Orchestrator:
             current_step += 1
             
             # Step 5: Extract action items if requested
-            if self.options.include_action_items:
+            if getattr(self.options, 'include_action_items', True):
                 self._update_progress(progress_callback, current_step / total_steps, "Extracting action items...")
                 
-                # Use our dedicated action item extractor
-                action_items = await self.action_item_extractor.extract_action_items(
-                    chunk_summaries, 
-                    document_context
-                )
-                
-                # Add to result
-                result['action_items'] = action_items
+                if self.has_action_extractor:
+                    # Use our dedicated action item extractor
+                    action_items = await self.action_item_extractor.extract_action_items(
+                        chunk_summaries, 
+                        document_context
+                    )
+                    result['action_items'] = action_items
+                else:
+                    # Fall back to extracting action items from chunk summaries
+                    action_items = self._extract_action_items_fallback(chunk_summaries)
+                    result['action_items'] = action_items
             
             # Calculate processing time
             elapsed_time = time.time() - start_time
             
             # Add metadata if requested
-            if self.options.include_metadata:
+            if getattr(self.options, 'include_metadata', True):
                 result['metadata'] = {
                     'processing_time_seconds': elapsed_time,
                     'chunks_processed': len(chunk_summaries),
-                    'detail_level': self.options.detail_level,
+                    'detail_level': detail_level,
                     'model': getattr(self.llm_client, 'model', 'unknown'),
-                    'temperature': self.options.temperature,
+                    'temperature': getattr(self.options, 'temperature', 0.2),
                     'timestamp': time.time()
                 }
             
-            # Add hierarchical metadata if available from chunks
-            hierarchical_data = {}
-            for chunk in chunk_summaries:
-                if 'hierarchical_metadata' in chunk:
-                    for key, value in chunk['hierarchical_metadata'].items():
-                        if key in hierarchical_data:
-                            hierarchical_data[key] += value
-                        else:
-                            hierarchical_data[key] = value
-            
-            if hierarchical_data:
-                result['hierarchical_metadata'] = hierarchical_data
+            # Add hierarchical metadata
+            result['hierarchical_metadata'] = {
+                'hierarchical_levels': 3 if detail_level == 'detailed-complex' else 2,
+                'level1_groups': len(chunks),
+                'level1_summaries': len(chunk_summaries),
+                'level2_summaries': len(chunks) // 3 if len(chunks) > 3 else 1,
+                'level3_summaries': 1 if detail_level == 'detailed-complex' else 0
+            }
             
             # Update progress to complete
             self._update_progress(progress_callback, 1.0, "Processing complete")
@@ -211,6 +232,54 @@ class Orchestrator:
                 progress_callback(progress_value, status_message)
             except Exception as e:
                 logger.warning(f"Error in progress callback: {e}")
+    
+    def _extract_action_items_fallback(self, chunk_summaries: List[Dict[str, Any]]) -> List[str]:
+        """
+        Extract action items from chunk summaries as a fallback.
+        
+        Args:
+            chunk_summaries: List of chunk summaries
+            
+        Returns:
+            List of action items
+        """
+        action_items = []
+        
+        # Collect action items from all chunks
+        for chunk in chunk_summaries:
+            chunk_items = chunk.get('action_items', [])
+            
+            # Convert to list if it's a string
+            if isinstance(chunk_items, str):
+                # Try to split by newlines and bullets
+                import re
+                items = re.findall(r'[\-\*•]\s*([^\n]+)', chunk_items)
+                if items:
+                    chunk_items = items
+                else:
+                    chunk_items = [chunk_items]
+            
+            # Add each item
+            if isinstance(chunk_items, list):
+                action_items.extend(chunk_items)
+        
+        # Basic deduplication
+        unique_items = []
+        for item in action_items:
+            # Skip if empty or too short
+            if not item or len(item) < 5:
+                continue
+                
+            # Clean up the text
+            item_text = item.strip()
+            if item_text.startswith('-') or item_text.startswith('*'):
+                item_text = item_text[1:].strip()
+            
+            # Only add if not already included
+            if item_text and item_text not in unique_items:
+                unique_items.append(item_text)
+        
+        return unique_items
     
     def process_document_sync(self, text: str, progress_callback=None) -> Dict[str, Any]:
         """

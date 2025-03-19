@@ -10,7 +10,7 @@ from typing import List, Dict, Any, Optional, Tuple
 logger = logging.getLogger(__name__)
 
 class DocumentChunker:
-    """Smart text chunking that adapts to document structure."""
+    """Smart text chunking that adapts to document structure and detail requirements."""
     
     def __init__(self):
         """Initialize the document chunker."""
@@ -39,6 +39,8 @@ class DocumentChunker:
             # Ensure a reasonable maximum (about 4000 tokens)
             max_chunk_size = min(max_chunk_size, 16000)
         
+        logger.info(f"Chunking document with min_chunks={min_chunks}, max_chunk_size={max_chunk_size}")
+        
         # Check if the document already fits in a single chunk
         if len(text) <= max_chunk_size and min_chunks <= 1:
             return [{
@@ -60,11 +62,15 @@ class DocumentChunker:
         
         # If we didn't get enough chunks, fall back to simpler chunking
         if len(chunks) < min_chunks:
+            logger.info(f"Insufficient chunks ({len(chunks)}), falling back to evenly spaced chunking")
             chunks = self._chunk_evenly(text, min_chunks, max_chunk_size)
         
         # Ensure each chunk has an index
         for i, chunk in enumerate(chunks):
             chunk['index'] = i
+        
+        # Add position metadata (beginning, middle, end)
+        self._add_position_metadata(chunks)
         
         logger.info(f"Created {len(chunks)} chunks from document")
         return chunks
@@ -148,22 +154,31 @@ class DocumentChunker:
         # Sort transitions by position
         transitions.sort(key=lambda x: x[0])
         
-        # If no transitions found, fall back to structure-based chunking
-        if not transitions:
+        # If few transitions found, fall back to structure-based chunking
+        if len(transitions) < min_chunks * 3:  # Need several transitions per chunk
+            logger.info(f"Few speaker transitions ({len(transitions)}), using structure-based chunking")
             return self._chunk_by_structure(text, min_chunks, max_chunk_size)
+        
+        # Determine target chunk count based on transitions
+        target_chunks = max(min_chunks, min(len(transitions) // 10, 20))  # Aim for ~10 transitions per chunk
+        target_size = len(text) / target_chunks
         
         # Create chunks based on speaker transitions
         chunks = []
         current_start = 0
         current_text = ""
+        current_size = 0
         
-        for pos, marker in transitions:
+        for i, (pos, marker) in enumerate(transitions):
             # Skip if this is the start of the document
             if pos == 0:
                 continue
                 
-            # Check if adding this transition would exceed max size
-            if len(current_text) + (pos - current_start) > max_chunk_size:
+            # Calculate size of text from current start to this transition
+            segment_size = pos - current_start
+            
+            # Check if adding this segment would exceed max size or be near target size
+            if current_size + segment_size > max_chunk_size or current_size + segment_size >= target_size * 0.8:
                 # Finish current chunk
                 chunks.append({
                     'text': text[current_start:pos],
@@ -172,9 +187,12 @@ class DocumentChunker:
                     'chunk_type': 'transcript_segment'
                 })
                 current_start = pos
+                current_size = 0
+            else:
+                current_size += segment_size
             
-            # Update for last transition
-            if pos == transitions[-1][0]:
+            # Handle the last transition
+            if i == len(transitions) - 1:
                 chunks.append({
                     'text': text[current_start:],
                     'start_pos': current_start,
@@ -184,6 +202,7 @@ class DocumentChunker:
         
         # If we created no chunks (rare edge case), fall back
         if not chunks:
+            logger.warning("No chunks created from transcript, falling back to even chunking")
             return self._chunk_evenly(text, min_chunks, max_chunk_size)
         
         return chunks
@@ -200,7 +219,7 @@ class DocumentChunker:
         Returns:
             List of chunk dictionaries
         """
-        # Find structural breaks in priority order
+        # Find structural breaks in priority order (pattern, strength)
         structure_patterns = [
             # Headers (markdown-style)
             (r'(^|\n)#{1,3}\s+[^\n]+', 0.9),
@@ -231,9 +250,10 @@ class DocumentChunker:
         
         # If no break points found, fall back to even chunking
         if not break_points:
+            logger.warning("No structural break points found, falling back to even chunking")
             return self._chunk_evenly(text, min_chunks, max_chunk_size)
         
-        # Calculate desired chunk size
+        # Calculate desired chunk size to meet min_chunks requirement
         target_size = len(text) / min_chunks
         
         # Create chunks based on break points and size constraints
@@ -386,3 +406,42 @@ class DocumentChunker:
             current_pos = end_pos
         
         return chunks
+    
+    def _add_position_metadata(self, chunks: List[Dict[str, Any]]) -> None:
+        """
+        Add position metadata to chunks (introduction, early, middle, late, conclusion).
+        
+        Args:
+            chunks: List of chunk dictionaries to modify in place
+        """
+        chunk_count = len(chunks)
+        
+        if chunk_count == 1:
+            chunks[0]['position'] = 'full_document'
+            return
+        
+        if chunk_count == 2:
+            chunks[0]['position'] = 'introduction'
+            chunks[1]['position'] = 'conclusion'
+            return
+        
+        # For 3+ chunks, assign positions based on relative position
+        chunks[0]['position'] = 'introduction'
+        chunks[-1]['position'] = 'conclusion'
+        
+        if chunk_count <= 4:
+            # For 3-4 chunks, just have intro, middle, conclusion
+            for i in range(1, chunk_count - 1):
+                chunks[i]['position'] = 'middle'
+        else:
+            # For 5+ chunks, use early, middle, late positions
+            early_threshold = max(1, chunk_count // 4)
+            late_threshold = max(chunk_count - early_threshold - 1, chunk_count * 3 // 4)
+            
+            for i in range(1, chunk_count - 1):
+                if i < early_threshold:
+                    chunks[i]['position'] = 'early'
+                elif i >= late_threshold:
+                    chunks[i]['position'] = 'late'
+                else:
+                    chunks[i]['position'] = 'middle'
