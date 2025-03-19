@@ -3,15 +3,15 @@ version: '3.8'
 services:
   note-summarizer:
     build: .
-    container_name: note-summarizer
+    container_name: note-summarizer-lean
     ports:
       - "8501:8501"
     volumes:
-      - ./data:/app/data
+      - ./outputs:/app/outputs
       - cache-volume:/app/.cache
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - STREAMLIT_THEME_BASE=light
+      - STREAMLIT_THEME_BASE=dark  # Changed to dark to match the new UI design
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
     deploy:
@@ -23,4 +23,4 @@ services:
 
 volumes:
   cache-volume:
-    name: note-summarizer-cache
+    name: note-summarizer-lean-cache

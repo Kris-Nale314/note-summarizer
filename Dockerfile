@@ -13,11 +13,9 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download NLTK data
-RUN python -c "import nltk; nltk.download('punkt')"
-
-# Create cache directory for embedding and LLM results
+# Create cache directory for LLM results
 RUN mkdir -p /app/.cache && chmod 777 /app/.cache
+RUN mkdir -p /app/outputs && chmod 777 /app/outputs
 
 # Copy application code
 COPY . .
@@ -28,8 +26,8 @@ ENV STREAMLIT_SERVER_PORT=8501
 ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
 ENV CACHE_DIR=/app/.cache
 
-# Create volumes for persisting data and cache
-VOLUME /app/data
+# Create volumes for persisting data, cache and outputs
+VOLUME /app/outputs
 VOLUME /app/.cache
 
 # Expose the Streamlit port
